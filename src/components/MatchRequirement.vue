@@ -1,0 +1,114 @@
+<template lang="pug">
+div.match-requirement
+  div.info
+    div#title
+      span 为我匹配
+    div#age
+      span 年龄
+      div
+        vue-slider(v-model="ageRange")
+    div#sex
+      span 性别
+      div
+        span#boy(:class="sex === 0 ? 'blue-text' : ''", @click="sex = 0") 男 ♂
+        span#girl(:class="sex === 1 ? 'red-text' : ''", @click="sex = 1") 女 ♀
+    button#next(@click="uploadRequirement") 下一步
+  div.tips 点击开始聊天即代表同意《绪聊用户协议》
+</template>
+
+<script>
+import VueSlider from 'vue-slider-component'
+import axios from 'axios'
+
+export default {
+  name: 'match-requirement',
+  components: {
+    VueSlider
+  },
+  data () {
+    return {
+      ageRange: [0, 100],
+      sex: -1
+    }
+  },
+  methods: {
+    uploadRequirement () {
+      if (this.sex === -1) {
+        alert('请选择性别')
+        return
+      }
+      // 提交表单
+      axios.post('/login', {
+        openid: sessionStorage.openid,
+        avatarurl: sessionStorage.avatarurl,
+        username: sessionStorage.username,
+        userprovince: sessionStorage.userprovince,
+        usercity: sessionStorage.usercity,
+        userage: Number.parseInt(sessionStorage.userage),
+        usersex: Number.parseInt(sessionStorage.usersex),
+        matchminage: this.ageRange[0],
+        matchmaxage: this.ageRange[1],
+        matchsex: this.sex
+      }).then(res => {
+        if (res.status === 200) {
+          this.$router.push('/main-page')
+        }
+      }).catch(e => {
+        console.log(e)
+        alert('提交匹配要求失败，请重新尝试')
+      })
+    }
+  }
+}
+</script>
+
+<style lang="sass">
+.match-requirement
+  height: 100%
+  display: flex
+  flex-direction: column
+  .info
+    flex-grow: 1
+    padding: 0 .2rem
+    display: flex
+    flex-direction: column
+    justify-content: center
+    #age, #sex, #title
+      padding: .2rem 0
+      border-bottom: .01rem solid #888
+      font-size: .18rem
+      display: flex
+      > span
+        margin-right: .2rem
+      > div
+        flex-grow: 1
+    #title span
+      font-size: .15rem
+    #sex, #age
+      margin-top: .35rem
+    #sex
+      > div
+        display: flex
+        justify-content: space-around
+      #boy, #girl
+        color: #888
+      #boy.blue-text
+        color: #25a4d4
+      #girl.red-text
+        color: #faa523
+    #next
+      width: 100%
+      margin-top: 1rem
+      background: #12b7f5
+      font-size: .15rem
+      border: none
+      border-radius: .3rem
+      padding: .1rem
+      color: white
+      outline: none
+  .tips
+    font-size: .12rem
+    color: #888
+    text-align: center
+    padding: .2rem
+</style>
