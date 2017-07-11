@@ -3,7 +3,7 @@ div.photo-and-tag
   div.user-and-tag
     div.user
       img(src="../assets/QQ.jpg")
-      div.nickname nickname
+      div.nickname {{ nickname }}
     transition-group.tags(name="list-1", tag="div")
       span.tag(v-for="(tag, i) in userTags", :id="'user-' + i", :key="tag") {{ tag }}
     div.info 点击标签添加
@@ -14,12 +14,15 @@ div.photo-and-tag
 </template>
 
 <script>
+import Conf from '../config'
+
 export default {
   name: 'photo-and-tag',
   data () {
     return {
+      nickname: '开心的小猫',
       userTags: ['开心', '高兴', '想分享'],
-      sysTags: ['智障', '有毒', '想骂人', '找虐', '6666', '2333', '8888', '郁闷', '心碎', '慵懒']
+      sysTags: Conf.systemTags
     }
   },
   mounted () {
@@ -61,7 +64,7 @@ export default {
     },
     takePhoto () {
       console.log('take photo')
-      // window.PhotoNative.takePhoto()
+      // 调用Native接口拍照
     },
     match () {
       if (this.userTags.length === 0) {

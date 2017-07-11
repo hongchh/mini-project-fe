@@ -4,7 +4,7 @@ div.main-page(@click.prevent="isShowMenu = false")
   div.user-mini-photo
     img(:class="isShowMenu ? 'move-right' : ''" src="../assets/QQ.jpg" @click.stop="showMenu")
   img.user-photo(src="../assets/QQ.jpg")
-  button(@click.stop="takePhoto") 拍照并上传
+  button(@click="takePhoto") {{ action }}
 </template>
 
 <script>
@@ -17,13 +17,14 @@ export default {
   },
   data () {
     return {
+      action: this.$route.query.error ? '照片无效请重拍' : '拍照并上传',
       isShowMenu: false
     }
   },
   methods: {
     takePhoto () {
       console.log('take photo')
-      // window.PhotoNative.takePhoto()
+      // TODO: 调用Native接口拍照并上传
     },
     showMenu () {
       this.isShowMenu = !this.isShowMenu
@@ -42,7 +43,7 @@ p
   padding: 0
   margin: 0
 .main-page
-  min-height: 100%
+  height: 100%
   display: flex
   flex-direction: column
   justify-content: space-between
@@ -66,6 +67,7 @@ p
     //flex-grow: 1
     margin: .05rem
     border: .01rem solid #888
+    max-height: 80%
   button
     width: 100%
     background: #12b7f5
