@@ -1,6 +1,10 @@
 <template lang="pug">
 div.basic-info
-  div
+  div.toolbar
+    span.back(@click="relogin") 返回
+    span.title 填写资料
+    span.place-holder 占位
+  div.age-and-sex
     div#age
       span 年龄
       div
@@ -10,7 +14,7 @@ div.basic-info
       div
         span#boy(:class="sex === 0 ? 'blue-text' : ''", @click="sex = 0") 男 ♂
         span#girl(:class="sex === 1 ? 'red-text' : ''", @click="sex = 1") 女 ♀
-    button#next(@click="uploadBasicInfo") 下一步
+    button#next(@click="setBasicInfo") 下一步
 </template>
 
 <script>
@@ -30,10 +34,9 @@ export default {
     }
   },
   methods: {
-    uploadBasicInfo () {
+    setBasicInfo () {
       if (this.sex === -1) {
-        this.dialogContent = '请选择性别'
-        this.showDialog = true
+        alert('请选择性别')
         return
       }
       sessionStorage.openid = this.$route.query.openid
@@ -44,6 +47,10 @@ export default {
       sessionStorage.userage = this.age
       sessionStorage.usersex = this.sex
       this.$router.push('/match-requirement')
+    },
+    relogin () {
+      console.log('relogin')
+      // TODO: 调用Native方法选择其他账号登录
     }
   }
 }
@@ -52,12 +59,24 @@ export default {
 <style lang="sass">
 .basic-info
   height: 100%
-  display: flex
-  align-items: center
-  justify-content: center
-  > div
-    width: 100%
+  .toolbar
+    height: .6rem
+    background: #12b7f5
+    display: flex
+    align-items: center
     padding: 0 .2rem
+    span
+      font-size: .15rem
+      color: white
+    .title
+      font-size: .2rem
+      flex-grow: 1
+      text-align: center
+    .place-holder
+      opacity: 0
+  .age-and-sex
+    padding: 0 .2rem
+    margin-top: 1rem
     #age, #sex
       padding: .2rem 0
       border-bottom: .01rem solid #888

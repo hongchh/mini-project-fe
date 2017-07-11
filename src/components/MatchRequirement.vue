@@ -1,6 +1,10 @@
 <template lang="pug">
 div.match-requirement
-  div.info
+  div.toolbar
+    span.back(@click="$router.back()") 返回
+    span.title 选择匹配要求
+    span.place-holder 占位
+  div.age-and-sex
     div#title
       span 为我匹配
     div#age
@@ -65,10 +69,23 @@ export default {
 <style lang="sass">
 .match-requirement
   height: 100%
-  display: flex
-  flex-direction: column
-  .info
-    flex-grow: 1
+  .toolbar
+    height: .6rem
+    background: #12b7f5
+    display: flex
+    align-items: center
+    padding: 0 .2rem
+    span
+      font-size: .15rem
+      color: white
+    .title
+      font-size: .2rem
+      flex-grow: 1
+      text-align: center
+    .place-holder
+      opacity: 0
+  .age-and-sex
+    margin-top: 1rem
     padding: 0 .2rem
     display: flex
     flex-direction: column

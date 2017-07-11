@@ -42,7 +42,7 @@ p
   padding: 0
   margin: 0
 .main-page
-  height: 100%
+  min-height: 100%
   display: flex
   flex-direction: column
   justify-content: space-between
