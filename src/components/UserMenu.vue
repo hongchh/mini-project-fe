@@ -1,29 +1,30 @@
 <template lang="pug">
   div(:class="isShowMenu ? 'user-menu showMenu' : 'user-menu'")
-    div(:class="isPrefer || isCount ? 'tab-wraper prefer' : 'tab-wraper'")
+    div(:class="isPrefer || isCount ? 'tab-wraper prefer' : 'tab-wraper'" @click.stop="")
       div.tab-1.tab
-        p(@click="hideMenu") < 返回
+        p(@click.stop="hideMenu") < 返回
         ul
-          li(@click="setPrefer") 偏好设置
-          li(@click="userCount") 账户
+          li(@click.stop="setPrefer") 偏好设置
+          li(@click.stop="userCount") 账户
           li 分享给朋友
       div(:class="isPrefer ? 'tab-2 tab' : 'tab-2 tab prefer-hide'")
-        p(@click="lastMenu") < 返回
+        p(@click.stop="lastMenu") < 返回
         .info
-          div#title
+          div.title
             span 为我匹配
-          div#age
+          div.age
             span 年龄
             div
               vue-slider(v-model="ageRange")
-          div#sex
+          div.sex
             span 性别
             div
-              span#boy(:class="sex === 0 ? 'blue-text' : ''", @click="sex = 0") 男 ♂
-              span#girl(:class="sex === 1 ? 'red-text' : ''", @click="sex = 1") 女 ♀
+              span.boy(:class="sex === 0 ? 'blue-text' : ''", @click.stop="sex = 0") 男 ♂
+              span.girl(:class="sex === 1 ? 'red-text' : ''", @click.stop="sex = 1") 女 ♀
+          button.next  确定
       div(:class="isCount ? ' tab-3 tab tab3-show' : 'tab-3 tab'")
-        p(@click="lastMenu") < 返回
-        div
+        p(@click.stop="lastMenu") < 返回
+        div.count-money
           span 账户
           span.money {{countMoney}}
         div
@@ -35,7 +36,7 @@
 import VueSlider from 'vue-slider-component'
 
 export default {
-  name: 'main-page',
+  name: 'user-menu',
   components: {
     VueSlider
   },
@@ -48,7 +49,6 @@ export default {
       isCount: false,
       ageRange: [0, 100],
       sex: -1,
-
       countMoney: '￥' + 12.98,
       totalIncome: '￥' + 52.88
     }
@@ -82,14 +82,16 @@ p
 .user-menu
   position: absolute
   top: 0
-  left: -800px
+  left: -100%
   z-index: 999
   overflow: hidden
   width: 80%
   font-size: .15rem
   background: #000000
   color: #ffffff
-  transition: all 1s ease-out
+  border-radius: 4px
+  box-shadow: 0 0 6px #d3d3d3
+  transition: all .8s ease-out
   .tab-wraper
     position: relative
     width: 200%
@@ -112,6 +114,8 @@ p
       position: absolute
       right: 0
       display: none
+      .count-money
+        margin-top: .2rem
       div
         padding: .2rem
         .money
@@ -131,7 +135,7 @@ p
   display: flex
   flex-direction: column
   justify-content: center
-  #age, #sex, #title
+  .age, .sex, .title
     padding: .1rem 0
     border-bottom: .01rem solid #888
     display: flex
@@ -139,18 +143,28 @@ p
       margin-right: .2rem
     > div
       flex-grow: 1
-  #title span
+  .title span
     font-size: .15rem
-  #sex, #age
+  .sex, .age
     margin-top: .35rem
-  #sex
+  .sex
     > div
       display: flex
       justify-content: space-around
-    #boy, #girl
+    .boy, .girl
       color: #888
-    #boy.blue-text
+    .boy.blue-text
       color: #25a4d4
-    #girl.red-text
+    .girl.red-text
       color: #faa523
+  .next
+      width: 100%
+      margin-top: .1rem
+      background: #12b7f5
+      font-size: .15rem
+      border: none
+      border-radius: .3rem
+      padding: .08rem
+      color: white
+      outline: none
 </style>
