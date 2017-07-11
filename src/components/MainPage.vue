@@ -1,10 +1,10 @@
 <template lang="pug">
-div.main-page
+div.main-page(@click.prevent="isShowMenu = false")
   UserMenu(:isShowMenu="isShowMenu" @parentHideMenu="hideMenu")
   div.user-mini-photo
-    img(:class="isShowMenu ? 'move-right' : ''" src="../assets/QQ.jpg" @click="showMenu")
+    img(:class="isShowMenu ? 'move-right' : ''" src="../assets/QQ.jpg" @click.stop="showMenu")
   img.user-photo(src="../assets/QQ.jpg")
-  button(@click="takePhoto") 拍照并上传
+  button(@click.stop="takePhoto") 拍照并上传
 </template>
 
 <script>
@@ -59,12 +59,12 @@ p
       height: .5rem
       border: 1px solid #eee
       border-radius: 50%
-      transition: all .5s ease-out
+      transition: all .8s ease-out
     .move-right
       left: 85%
-      
   .user-photo
     //flex-grow: 1
+    margin: .05rem
     border: .01rem solid #888
   button
     width: 100%
