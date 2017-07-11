@@ -89,6 +89,8 @@ p
   font-size: .15rem
   background: #000000
   color: #ffffff
+  border-radius: 4px
+  box-shadow: 0 0 6px #d3d3d3
   transition: all .8s ease-out
   .tab-wraper
     position: relative
