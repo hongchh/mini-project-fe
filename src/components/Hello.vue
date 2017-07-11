@@ -123,17 +123,17 @@ a {
   transform: translate(-50%, 0);
 }
 #dot-box li {
-  display: inline-block;
-  width: 20px;
-  height: 20px;
-  margin: 5px;
+  float: left;
+  width: .1rem;
+  height: .1rem;
+  margin: .05rem;
   border-radius: 50%;
 }
 .dot-not-curr {
   background: #eee;
 }
 .dotCurr {
-  background: orange;
+  background: #12b7f5;
 }
 #go {
   position: absolute;
@@ -141,9 +141,9 @@ a {
   left: 50%;
   padding: 10px 18px;
   transform: translate(-50%, 0);
-  background: orange;
+  background: #12b7f5;
   color: #fff;
   border-radius: 5px;
-  font-size: 36px;
+  font-size: .16rem;
 }
 </style>
