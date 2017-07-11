@@ -18,7 +18,7 @@ export default {
 
 <style lang="sass">
 .main-page
-  height: 100%
+  min-height: 100%
   display: flex
   flex-direction: column
   box-sizing: border-box
