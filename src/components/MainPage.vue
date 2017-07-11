@@ -25,6 +25,7 @@ export default {
     takePhoto () {
       console.log('take photo')
       // TODO: 调用Native接口拍照并上传
+      window.PhotoNative.takePhoto()
     },
     showMenu () {
       this.isShowMenu = !this.isShowMenu

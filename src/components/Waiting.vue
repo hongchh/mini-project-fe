@@ -15,6 +15,7 @@ export default {
   mounted () {
     console.log(this.$route.query.tags)
     // TODO: 发送请求给服务器获取匹配对象, 调起Native聊天
+    window.TalkNative.talkWith()
   }
 }
 </script>

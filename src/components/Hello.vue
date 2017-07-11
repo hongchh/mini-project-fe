@@ -9,7 +9,7 @@
       <div class="banner-1 banner"></div>
       <div class="banner-2 banner"></div>
       <div class="banner-3 banner">
-        <a href="#" id="go">进入应用</a>
+        <a href="#" id="go" @click="enterApp">进入应用</a>
       </div>
     </div>
     <ul id="dot-box">
@@ -59,6 +59,9 @@ export default {
       })
 
       this.isCurrent[this.slideCurr] = true
+    },
+    enterApp () {
+      window.LoginNative.login()
     }
   }
 }

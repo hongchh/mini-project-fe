@@ -20,8 +20,8 @@ export default {
   name: 'photo-and-tag',
   data () {
     return {
-      nickname: '开心的小猫',
-      userTags: ['开心', '高兴', '想分享'],
+      nickname: this.$route.query.nickname || '',
+      userTags: this.$route.query.tags ? this.$route.query.tags.split(',') : [],
       sysTags: Conf.systemTags
     }
   },
