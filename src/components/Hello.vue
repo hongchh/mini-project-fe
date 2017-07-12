@@ -90,12 +90,15 @@ html, body
       height: 100%;
       width: 33.33333333%;
     .banner-1
-      background: red;
+      background: url("../assets/tab1.jpeg");
+      background-size: 100% 100%;
     .banner-2
-      background: yellow;
+      background: url("../assets/tab2.jpeg");
+      background-size: 100% 100%;
     .banner-3
       position: relative;
-      background: green;
+      background: url("../assets/tab3.jpeg");
+      background-size: 100% 100%;
       #go
         position: absolute;
         bottom: 15%;
@@ -106,6 +109,7 @@ html, body
         color: #fff;
         border-radius: 5px;
         font-size: .16rem;
+        box-shadow: 0 0 2px #fff;
   #dot-box
     position: absolute;
     left: 50%;
