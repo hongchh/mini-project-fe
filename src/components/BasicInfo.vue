@@ -46,7 +46,7 @@ export default {
       sessionStorage.usercity = this.$route.query.usercity
       sessionStorage.userage = this.age
       sessionStorage.usersex = this.sex
-      this.$router.push('/match-requirement')
+      this.$router.replace('/match-requirement')
     },
     relogin () {
       window.LoginNative.login()

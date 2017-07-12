@@ -1,7 +1,7 @@
 <template lang="pug">
 div.match-requirement
   div.toolbar
-    span.back(@click="$router.back()") 返回
+    span.back(@click="$router.replace('/basic-info')") 返回
     span.title 选择匹配要求
     span.place-holder 占位
   div.age-and-sex
@@ -55,7 +55,7 @@ export default {
       data.append('matchsex', this.sex)
       axios.post('/index.php/login/userlogin', data).then(res => {
         if (res.status === 200) {
-          this.$router.push('/main-page')
+          this.$router.replace('/main-page')
         }
       }).catch(e => {
         console.log(e)
