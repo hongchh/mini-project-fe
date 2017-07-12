@@ -4,8 +4,8 @@
       div.tab-1.tab
         p(@click.stop="hideMenu") < 返回
         ul
-          li(@click.stop="setPrefer") 偏好设置
-          li(@click.stop="userCount") 账户
+          li(@click.stop="isPrefer = true") 偏好设置
+          li(@click.stop="isCount = true") 账户
           li 分享给朋友
       div(:class="isPrefer ? 'tab-2 tab' : 'tab-2 tab prefer-hide'")
         p(@click.stop="lastMenu") < 返回
@@ -15,13 +15,13 @@
           div.age
             span 年龄
             div
-              vue-slider(v-model="ageRange")
+              vue-slider(value="ageRange" v-model="ageRange")
           div.sex
             span 性别
             div
               span.boy(:class="sex === 0 ? 'blue-text' : ''", @click.stop="sex = 0") 男 ♂
               span.girl(:class="sex === 1 ? 'red-text' : ''", @click.stop="sex = 1") 女 ♀
-          button.next  确定
+          button.next(@click="updateUserInfo")  确定
       div(:class="isCount ? ' tab-3 tab tab3-show' : 'tab-3 tab'")
         p(@click.stop="lastMenu") < 返回
         div.count-money
@@ -34,7 +34,7 @@
 
 <script>
 import VueSlider from 'vue-slider-component'
-
+import axios from 'axios'
 export default {
   name: 'user-menu',
   components: {
@@ -58,15 +58,28 @@ export default {
       this.$emit('parentHideMenu', false)
       this.isShowMenu = false
     },
-    setPrefer () {
-      this.isPrefer = true
-    },
-    userCount () {
-      this.isCount = true
-    },
     lastMenu () {
       this.isCount = false
       this.isPrefer = false
+    },
+    updateUserInfo () {
+      if (this.sex === -1) {
+        alert('请选择性别')
+      }
+      // 提交表单
+      axios.post('/login', {
+        matchminage: this.ageRange[0],
+        matchmaxage: this.ageRange[1],
+        matchsex: this.sex
+      }).then(res => {
+        if (res.status === 200) {
+          this.hideMenu()
+          // this.$router.push('/main-page')
+        }
+      }).catch(e => {
+        console.log(e)
+        alert('提交匹配要求失败，请重新尝试')
+      })
     }
   }
 }
