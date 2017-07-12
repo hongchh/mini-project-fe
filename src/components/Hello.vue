@@ -7,7 +7,7 @@
     .banner-1.banner
     .banner-2.banner
     .banner-3.banner
-      span#go(@click="enterApp") 进入应用
+      span#go(@touchend="enterApp") 进入应用
   #dot-box
     li.dot-not-curr(:class="{dotCurr: isCurrent[0]}")
     li.dot-not-curr(:class="{dotCurr: isCurrent[1]}")

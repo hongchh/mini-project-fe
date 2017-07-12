@@ -64,7 +64,7 @@ export default {
     },
     takePhoto () {
       console.log('take photo')
-      // 调用Native接口拍照
+      window.PhotoNative.takePhoto()
     },
     match () {
       if (this.userTags.length === 0) {

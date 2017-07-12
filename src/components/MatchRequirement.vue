@@ -42,18 +42,18 @@ export default {
         return
       }
       // 提交表单
-      axios.post('/index.php/login/userlogin', {
-        openid: sessionStorage.openid,
-        avatarurl: sessionStorage.avatarurl,
-        username: sessionStorage.username,
-        userprovince: sessionStorage.userprovince,
-        usercity: sessionStorage.usercity,
-        userage: Number.parseInt(sessionStorage.userage),
-        usersex: Number.parseInt(sessionStorage.usersex),
-        matchminage: this.ageRange[0],
-        matchmaxage: this.ageRange[1],
-        matchsex: this.sex
-      }).then(res => {
+      let data = new window.FormData()
+      data.append('openid', sessionStorage.openid)
+      data.append('avatarurl', sessionStorage.avatarurl)
+      data.append('username', sessionStorage.username)
+      data.append('userprovince', sessionStorage.userprovince)
+      data.append('usercity', sessionStorage.usercity)
+      data.append('userage', Number.parseInt(sessionStorage.userage))
+      data.append('usersex', Number.parseInt(sessionStorage.usersex))
+      data.append('matchminage', this.ageRange[0])
+      data.append('matchmaxage', this.ageRange[1])
+      data.append('matchsex', this.sex)
+      axios.post('/index.php/login/userlogin', data).then(res => {
         if (res.status === 200) {
           this.$router.push('/main-page')
         }
