@@ -1,23 +1,17 @@
-<template>
-  <div class="container">
-    <div class="banner-wraper" id="banner-wraper" 
-      ref="bannerWraper" 
-      :style="{width: bannerWraperWidth}"
-      @touchstart="touchStartHandler"
-      @touchmove="touchmoveHandler"
-      @touchend="touchEndHandler">
-      <div class="banner-1 banner"></div>
-      <div class="banner-2 banner"></div>
-      <div class="banner-3 banner">
-        <span id="go" @click="enterApp">进入应用</span>
-      </div>
-    </div>
-    <ul id="dot-box">
-      <li class="dot-not-curr" :class="{dotCurr: isCurrent[0]}"></li>
-      <li class="dot-not-curr" :class="{dotCurr: isCurrent[1]}"></li>
-      <li class="dot-not-curr" :class="{dotCurr: isCurrent[2]}"></li>
-    </ul>
-  </div>
+<template lang="pug">
+.container
+  .banner-wraper#banner-wraper(ref="bannerWraper" :style="{width: bannerWraperWidth}"
+  @touchstart="touchStartHandler"
+  @touchmove="touchmoveHandler"
+  @touchend="touchEndHandler")
+    .banner-1.banner
+    .banner-2.banner
+    .banner-3.banner
+      span#go(@click="enterApp") 进入应用
+  #dot-box
+    li.dot-not-curr(:class="{dotCurr: isCurrent[0]}")
+    li.dot-not-curr(:class="{dotCurr: isCurrent[1]}")
+    li.dot-not-curr(:class="{dotCurr: isCurrent[2]}")
 </template>
 
 <script>
@@ -67,86 +61,65 @@ export default {
 }
 </script>
 
-<style>
-#app {
+<style lang="sass">
+#app
   height: 100%;
-}
-html, body, ul, li {
+html, body, ul, li
   margin: 0;
   padding: 0;
-}
-html, body {
+html, body 
   width: 100%;
   height: 100%;
-}
-ul, li {
-  list-style: none;
-}
-a {
-  text-decoration: none;
-}
-.container {
+
+.container
   position: relative;
   overflow: hidden;
   height: 100%;
   bottom: 0;
   top: 0;
-}
-
-.banner-wraper {
-  position: absolute;
-  left:0;
-  top:0;
-  padding:0;
-  margin:0;
-  height: 100%;
-  transition: all .2s ease-in-out;
-}
-.banner {
-  float:left; 
-  height: 100%;
-  width: 33.33333333%;
-}
-
-.banner-1 {
-  background: red;
-}
-.banner-2 {
-  background: yellow;
-}
-.banner-3 {
-  position: relative;
-  background: green;
-}
-
-#dot-box {
-  position: absolute;
-  left: 50%;
-  bottom: 5%;
-  transform: translate(-50%, 0);
-}
-#dot-box li {
-  float: left;
-  width: .1rem;
-  height: .1rem;
-  margin: .05rem;
-  border-radius: 50%;
-}
-.dot-not-curr {
-  background: #eee;
-}
-.dotCurr {
-  background: #12b7f5;
-}
-#go {
-  position: absolute;
-  bottom: 15%;
-  left: 50%;
-  padding: 10px 18px;
-  transform: translate(-50%, 0);
-  background: #12b7f5;
-  color: #fff;
-  border-radius: 5px;
-  font-size: .16rem;
-}
+  .banner-wraper
+    position: absolute;
+    left: 0;
+    top: 0;
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    transition: all .2s ease-in-out;
+    .banner
+      float: left; 
+      height: 100%;
+      width: 33.33333333%;
+    .banner-1
+      background: red;
+    .banner-2
+      background: yellow;
+    .banner-3
+      position: relative;
+      background: green;
+      #go
+        position: absolute;
+        bottom: 15%;
+        left: 50%;
+        padding: 10px 18px;
+        transform: translate(-50%, 0);
+        background: #12b7f5;
+        color: #fff;
+        border-radius: 5px;
+        font-size: .16rem;
+  #dot-box
+    position: absolute;
+    left: 50%;
+    bottom: 5%;
+    transform: translate(-50%, 0);
+    li
+      float: left;
+      width: .1rem;
+      height: .1rem;
+      margin: .05rem;
+      border-radius: 50%;
+      list-style: none;
+    .dot-not-curr
+      background: #eee;
+    .dotCurr
+      background: #12b7f5;
 </style>
