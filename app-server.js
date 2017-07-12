@@ -20,7 +20,7 @@ app.use('/static/css', express.static(css))
 app.use('/static/img', express.static(img))
 app.use('/index.manifest', express.static(manifest))
 app.use('/*/index.manifest', express.static(manifest))
-app.use('/login', proxyMiddleware({target: config.apiServer, changeOrigin: true}))
+app.use('/index.php', proxyMiddleware({target: config.apiServer, changeOrigin: true}))
 
 app.use('*', (req, res) => {
   res.redirect('/app')
