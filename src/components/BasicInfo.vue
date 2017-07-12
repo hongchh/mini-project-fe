@@ -49,8 +49,7 @@ export default {
       this.$router.push('/match-requirement')
     },
     relogin () {
-      console.log('relogin')
-      // TODO: 调用Native方法选择其他账号登录
+      window.LoginNative.login()
     }
   }
 }

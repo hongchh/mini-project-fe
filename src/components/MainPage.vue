@@ -3,7 +3,7 @@ div.main-page(@click.prevent="isShowMenu = false")
   UserMenu(:isShowMenu="isShowMenu" @parentHideMenu="hideMenu")
   div.user-mini-photo
     img(:class="isShowMenu ? 'move-right' : ''" src="../assets/QQ.jpg" @click.stop="showMenu")
-  img.user-photo(src="../assets/QQ.jpg")
+  img.user-photo#photo(src="../assets/QQ.jpg")
   button(@click="takePhoto") {{ action }}
 </template>
 
@@ -24,7 +24,6 @@ export default {
   methods: {
     takePhoto () {
       console.log('take photo')
-      // TODO: 调用Native接口拍照并上传
       window.PhotoNative.takePhoto()
     },
     showMenu () {
@@ -32,6 +31,11 @@ export default {
     },
     hideMenu (data) {
       this.isShowMenu = data
+    }
+  },
+  mounted () {
+    if (this.$route.query.photo) {
+      document.getElementById('photo').setAttribute('src', this.$route.query.photo)
     }
   }
 }
