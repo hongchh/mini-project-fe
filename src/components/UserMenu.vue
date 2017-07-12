@@ -34,7 +34,7 @@
 
 <script>
 import VueSlider from 'vue-slider-component'
-// import axios from 'axios'
+import axios from 'axios'
 export default {
   name: 'user-menu',
   components: {
