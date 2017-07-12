@@ -42,7 +42,7 @@ export default {
         return
       }
       // 提交表单
-      axios.post('/login', {
+      axios.post('/index.php/login/userlogin', {
         openid: sessionStorage.openid,
         avatarurl: sessionStorage.avatarurl,
         username: sessionStorage.username,
