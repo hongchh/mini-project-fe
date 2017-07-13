@@ -9,7 +9,6 @@ div.main-page(@click.prevent="isShowMenu = false")
 
 <script>
 import UserMenu from './UserMenu'
-
 export default {
   name: 'main-page',
   components: {

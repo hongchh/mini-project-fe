@@ -15,7 +15,7 @@
           div.age
             span 年龄
             div
-              vue-slider(value="ageRange" v-model="ageRange")
+              vue-slider(v-model="ageRange")
           div.sex
             span 性别
             div
