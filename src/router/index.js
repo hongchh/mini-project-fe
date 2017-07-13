@@ -9,9 +9,11 @@ import MainPage from '../components/MainPage'
 import Waiting from '../components/Waiting'
 import PhotoAndTag from '../components/PhotoAndTag'
 import Hello from '../components/Hello'
+import Evaluate from '../components/Evaluate'
 
 const router = new Router({
   routes: [
+    { path: '/evaluate', component: Evaluate },
     { path: '/basic-info', component: BasicInfo },
     { path: '/match-requirement', component: MatchRequirement },
     { path: '/main-page', component: MainPage },

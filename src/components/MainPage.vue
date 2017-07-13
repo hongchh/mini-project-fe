@@ -3,12 +3,12 @@ div.main-page(@click.prevent="isShowMenu = false")
   UserMenu(:isShowMenu="isShowMenu" @parentHideMenu="hideMenu")
   div.user-mini-photo
     img(:class="isShowMenu ? 'move-right' : ''" src="../assets/QQ.jpg" @click.stop="showMenu")
-  img.user-photo#photo(src="../assets/QQ.jpg")
+  img.user-photo(src="../assets/QQ.jpg")
   button(@click="takePhoto") {{ action }}
 </template>
 
 <script>
-import UserMenu from './UserMenu'
+import UserMenu from './UserMenu1'
 export default {
   name: 'main-page',
   components: {
@@ -67,11 +67,21 @@ p
       transition: all .8s ease-out
     .move-right
       left: 85%
-  .user-photo
+  .ad-box
     //flex-grow: 1
+    overflow: hidden
     margin: .05rem
     border: .01rem solid #888
     max-height: 80%
+    .ad-wraper
+      overflow: hidden
+      .ad-one
+        float: left
+        height: 100%
+        width: 100%
+        img
+          // height: 100%
+          // width: 100%
   button
     width: 100%
     background: #12b7f5

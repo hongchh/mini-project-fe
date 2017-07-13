@@ -7,7 +7,7 @@
           li(@click.stop="isPrefer = true") 偏好设置
           li(@click.stop="isCount = true") 账户
           li 分享给朋友
-      div(:class="isPrefer ? 'tab-2 tab' : 'tab-2 tab prefer-hide'")
+      div(:class="isPrefer ? 'tab' : 'tab prefer-hide'")
         p(@click.stop="lastMenu") < 返回
         .info
           div.title
