@@ -10,7 +10,7 @@ div.match-requirement
     div#age
       span 年龄
       div
-        vue-slider(v-model="ageRange")
+        vue-slider(v-model="ageRange", :min="15", :max="50")
     div#sex
       span 性别
       div
@@ -31,7 +31,7 @@ export default {
   },
   data () {
     return {
-      ageRange: [0, 100],
+      ageRange: [15, 50],
       sex: -1
     }
   },
@@ -62,6 +62,11 @@ export default {
         alert('提交匹配要求失败，请重新尝试')
       })
     }
+  },
+  mounted () {
+    var dots = document.querySelectorAll('.vue-slider-dot')
+    dots[0].setAttribute('style', 'width: 30px; height: 30px; top: -12px; transition-duration: 0s; transform: translateX(-8px);')
+    dots[1].setAttribute('style', 'width: 30px; height: 30px; top: -12px; transition-duration: 0s; transform: translateX(-8px);')
   }
 }
 </script>
