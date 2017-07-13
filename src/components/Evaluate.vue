@@ -1,19 +1,22 @@
-<template>
-  <p class="start-box">
-    <input type="radio" name="a" value="0" checked="checked" />
-    <input type="radio" name="a" value="1" v-model="score[0]"/>
-    <input type="radio" name="a" value="2" />
-    <input type="radio" name="a" value="3" />
-    <input type="radio" name="a" value="4" />
-    <input type="radio" name="a" value="5" />
-  </p>
+<template lang="pug">
+  p.start-box
+    input(type="radio", name="a", value="0", checked="checked")
+    input(v-for="(score, i) in scores", value={score}, :key="i", name="a", type="radio")
 </template>
 <script>
 export default {
   name: 'evaluate',
   data () {
     return {
-      score: [1]
+      scores: [1, 2, 3, 4, 5],
+      lastScore: 0
+    }
+  },
+  methoods: {
+    starHandler () {
+      console.log(this.lastScore)
+      // this.lastScore = score
+      // console.log(score)
     }
   }
 }

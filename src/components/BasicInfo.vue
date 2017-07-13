@@ -8,7 +8,7 @@ div.basic-info
     div#age
       span 年龄
       div
-        vue-slider(v-model="age")
+        vue-slider(v-model="age", :min="15", :max="50")
     div#sex
       span 性别
       div
@@ -27,7 +27,7 @@ export default {
   },
   data () {
     return {
-      age: 0,
+      age: 15,
       sex: -1,
       showDialog: false,
       dialogContent: ''
@@ -51,6 +51,9 @@ export default {
     relogin () {
       window.LoginNative.login()
     }
+  },
+  mounted () {
+    document.querySelector('.vue-slider-dot').setAttribute('style', 'width: 30px; height: 30px; top: -12px; transition-duration: 0s; transform: translateX(-8px);')
   }
 }
 </script>

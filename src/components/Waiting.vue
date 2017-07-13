@@ -15,11 +15,8 @@ export default {
   components: {
     Spinner
   },
-  mounted () {
-    console.log(this.$route.query.tags)
-    // TODO: 发送请求给服务器获取匹配对象, 调起Native聊天
-    axios.get('/index.php/mood/getMatchedUser').then(res => {
-      console.log(res.data.data)
+  methods: {
+    chat (data) {
       let style = 'transform: scale(1.2); opacity: 1;'
       document.getElementById('success-log').setAttribute('style', style)
       setTimeout(() => {
@@ -31,9 +28,17 @@ export default {
           stars[i].setAttribute('style', 'top: ' + top + '%; opacity: 1; left: ' + left + '%')
         }
         setTimeout(() => {
-          window.TalkNative.talkWith(res.data.data)
+          window.TalkNative.talkWith(data)
         }, 1000)
       }, 500)
+    }
+  },
+  mounted () {
+    console.log(this.$route.query.tags)
+    // TODO: 发送请求给服务器获取匹配对象, 调起Native聊天
+    axios.get('/index.php/mood/getMatchedUser').then(res => {
+      console.log(res.data.data)
+      this.chat(res.data.data)
     }).catch(e => {
       console.log(e)
       alert('匹配失败')

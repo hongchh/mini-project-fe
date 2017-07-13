@@ -67,7 +67,7 @@ p
       transition: all .8s ease-out
     .move-right
       left: 85%
-  .ad-box
+  .user-p
     //flex-grow: 1
     overflow: hidden
     margin: .05rem

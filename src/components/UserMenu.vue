@@ -15,7 +15,11 @@
           div.age
             span 年龄
             div
+<<<<<<< HEAD
               vue-slider(v-model="ageRange")
+=======
+              vue-slider(v-model="ageRange", :min="15", :max="50")
+>>>>>>> b9dac8bbf45b59c72b818ca1b678e15e7b4e5893
           div.sex
             span 性别
             div
@@ -47,7 +51,7 @@ export default {
     return {
       isPrefer: false,
       isCount: false,
-      ageRange: [0, 100],
+      ageRange: [15, 15],
       sex: -1,
       countMoney: '￥' + 12.98,
       totalIncome: '￥' + 52.88
@@ -81,6 +85,11 @@ export default {
         alert('提交匹配要求失败，请重新尝试')
       })
     }
+  },
+  mounted () {
+    var dots = document.querySelectorAll('.vue-slider-dot')
+    dots[0].setAttribute('style', 'width: 35px; height: 35px; top: -15px; transition-duration: 0s; transform: translateX(-8px);')
+    dots[1].setAttribute('style', 'width: 35px; height: 35px; top: -15px; transition-duration: 0s; transform: translateX(-8px);')
   }
 }
 </script>
