@@ -3,7 +3,7 @@ div.waiting
   spinner(:size="50")
   span 匹配中
   div#success-log
-  img(src="../assets/star.png", v-for="i in 7")
+  img(src="../assets/star-on.png", v-for="i in 7")
 </template>
 
 <script>
