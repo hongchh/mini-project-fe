@@ -129,7 +129,7 @@ export default {
     outline: none
   .take-photo
     font-size: .15rem
-    color: #12b7f5
+    color: #888
     text-align: center
     display: block
   .list-1-enter, .list-1-leave-to
