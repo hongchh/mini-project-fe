@@ -1,5 +1,6 @@
 <template lang="pug">
 div.waiting
+  div.xiaohua {{ xiaohua }}
   spinner(:size="50")
   span 匹配中
   div#success-log
@@ -14,6 +15,11 @@ export default {
   name: 'waiting',
   components: {
     Spinner
+  },
+  data () {
+    return {
+      xiaohua: '“为什么大冷天人很难出被窝？”“因为冰系魔法通常带有禁锢效果。”'
+    }
   },
   methods: {
     chat (data) {
@@ -36,10 +42,10 @@ export default {
   mounted () {
     console.log(this.$route.query.tags)
     // TODO: 发送请求给服务器获取匹配对象, 调起Native聊天
-    this.chat({
-      openid: '0000',
-      nickname: '开心的小猪'
-    })
+    // this.chat({
+    //   openid: '0000',
+    //   nickname: '开心的小猪'
+    // })
     // axios.get('/index.php/mood/getMatchedUser').then(res => {
     //   console.log(res.data.data)
     //   this.chat(res.data.data)
@@ -58,6 +64,11 @@ export default {
   justify-content: center
   flex-direction: column
   align-items: center
+  .xiaohua
+    font-size: .2rem
+    padding: .2rem
+    margin-bottom: .2rem
+    text-align: center
   span
     font-size: .2rem
     color: #888
