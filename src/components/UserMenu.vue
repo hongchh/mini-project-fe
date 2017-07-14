@@ -1,11 +1,12 @@
 <template lang="pug">
-  div(:style="{height: tabWraperHeight}" :class="isShowMenu ? 'user-menu showMenu' : 'user-menu'")
-    div(:style="{height: tabWraperHeight}" :class="isPrefer || isCount ? 'tab-wraper tab-1-hide' : 'tab-wraper tab-1'" @click.stop="")
+  div(:style="{height: tabWraperHeight  + 'px'}" :class="isShowMenu ? 'user-menu showMenu' : 'user-menu'")
+    div(:style="{height: tabWraperHeight  + 'px'}" :class="isPrefer || isCount ? 'tab-wraper tab-1-hide' : 'tab-wraper tab-1'" @click.stop="")
       div.tab-1.tab
         p(@click.stop="hideMenu") < 返回
         ul
           li(@click.stop="isPrefer = true") 偏好设置
           li(@click.stop="isCount = true") 账户
+          li(@click.stop="moodMap") 心情图谱
           li 分享给朋友
       div(:class="isPrefer ? 'tab tab-2-show' : 'tab tab-2'" ref="tab2")
         p(@click.stop="isPrefer = false") < 返回
@@ -30,6 +31,18 @@
         div
           span 累计收入
           span.money {{totalIncome}}
+      div(:class="isMood ? 'tab tab-4 tab-4-show' : 'tab tab-4'")
+        p(@click.stop="isMood = false") < 返回
+        div.content
+          p 心情图谱
+          p 你这个月的心情图谱是
+          p 郁郁寡欢
+          p 再计较的事，多年后看来也不过是个不足挂齿的玩笑，再悲伤的事，多年后想起也不过是段可供回忆的往事，再困难的事，多年后怎么都觉得轻而易举，不快的总会过去，心脏只有那么小，总会让开心占据多一点空间，把不开心统统扫到一边，毕竟它们不过是细小的尘埃而已
+          div.img-container
+            a(href="https://item.jd.com/11963221.html")
+              img(src="../assets/left.jpg", alt="所有失去的都会以另一种方式归来")
+            a(href="https://detail.tmall.com/item.htm?spm=a230r.1.14.62.ebb2eb2n2ZMbc&id=522784907853&ns=1&abbucket=19")
+              img(src="../assets/right.jpg", alt="世界如此复杂，你要内心强大")
 </template>
 
 <script>
@@ -47,6 +60,7 @@ export default {
     return {
       isPrefer: false,
       isCount: false,
+      isMood: false,
       ageRange: [0, 100],
       sex: -1,
       countMoney: '￥' + 12.98,
@@ -55,7 +69,7 @@ export default {
     }
   },
   mounted () {
-    this.tabWraperHeight = this.$refs.tab2.offsetHeight + 'px'
+    this.tabWraperHeight = this.$refs.tab2.offsetHeight
   },
   methods: {
     hideMenu () {
@@ -66,19 +80,23 @@ export default {
       this.isCount = false
       this.isPrefer = false
     },
+    moodMap () {
+      this.isMood = true
+      this.tabWraperHeight = this.tabWraperHeight * 2
+    },
     updateUserInfo () {
       if (this.sex === -1) {
         alert('请选择性别')
       }
       // 提交表单
-      axios.post('/login', {
-        matchminage: this.ageRange[0],
-        matchmaxage: this.ageRange[1],
-        matchsex: this.sex
-      }).then(res => {
+      let data = new window.FormData()
+      data.append('openid', this.$route.query.openids)
+      data.append('matchminage', this.ageRange[0])
+      data.append('matchmaxage', this.ageRange[1])
+      data.append('matchsex', this.sex)
+      axios.post('/index.php/PersonCenter/modify', data).then(res => {
         if (res.status === 200) {
           this.hideMenu()
-          // this.$router.push('/main-page')
         }
       }).catch(e => {
         console.log(e)
@@ -118,7 +136,6 @@ p
     transition: all .8s ease-out
     .tab
       position: absolute
-      //padding: 5%
       top: 0
       left: 0
       width: 100%
@@ -155,6 +172,16 @@ p
       z-index: -2
     .tab-3-show
       z-index: 1 
+    .tab-4-show
+      z-index: 1
+    .tab-4-hide
+      z-index: -1
+    .content
+      text-align: center
+      a
+        padding: 5%
+      img
+        width: 40%
   .prefer
     transform: translate(-50%, 0)
   .prefer-hide
