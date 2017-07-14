@@ -2,7 +2,7 @@
 div.photo-and-tag
   div.user-and-tag
     div.user
-      img(src="../assets/QQ.jpg")
+      img(:src="$route.query.photo")
       div.nickname {{ nickname }}
     transition-group.tags(name="list-1", tag="div")
       span.tag(v-for="(tag, i) in userTags", :id="'user-' + i", :key="tag") {{ tag }}
@@ -19,9 +19,11 @@ import Conf from '../config'
 export default {
   name: 'photo-and-tag',
   data () {
+    let tags = this.$route.query.tags
+    tags = tags ? tags.substr(0, tags.length - 1).split(',') : []
     return {
       nickname: this.$route.query.nickname || '',
-      userTags: this.$route.query.tags ? this.$route.query.tags.split(',') : [],
+      userTags: tags,
       sysTags: Conf.systemTags
     }
   },

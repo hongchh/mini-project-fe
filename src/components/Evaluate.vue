@@ -1,26 +1,23 @@
 <template lang="pug">
   .container
     div.rate
-      Rate(v-model="lastScore")
+      img(src="../assets/star-on.png", v-for="i in rating", :id="i", @click="setRating($event)")
+      img(src="../assets/star-off.png", v-for="i in (5 - rating)", :id="i + rating", @click="setRating($event)")
     button#evaluateBtn(@click="EvaluateSub") 提交评价
 
 </template>
 <script>
-import Vue from 'vue'
-import { Rate } from 'element-ui'
-import 'element-ui/lib/theme-default/index.css'
-Vue.use(Rate)
 export default {
   name: 'evaluate',
-  components: {
-    Rate
-  },
   data () {
     return {
-      lastScore: 0
+      rating: 1
     }
   },
   methods: {
+    setRating (event) {
+      this.rating = Number.parseInt(event.target.id)
+    },
     EvaluateSub () {
       // ...
     }
@@ -36,12 +33,21 @@ export default {
   height: 100%
   text-align: center
   .rate
-    text-align: center
+    display: flex
+    justify-content: space-around
+    margin-top: .1rem
+    padding: .1rem
+    img
+      width: .4rem
+      height: .4rem
   #evaluateBtn
     margin: 0 auto
-    font-size: .2rem
-    border: 0
+    background: #12b7f5
+    font-size: .15rem
+    border: none
+    border-radius: .3rem
     padding: .1rem
-    border-radius: 4px
+    color: white
+    outline: none
     width: 40%
 </style>

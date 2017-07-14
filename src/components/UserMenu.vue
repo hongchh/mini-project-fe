@@ -15,11 +15,7 @@
           div.age
             span 年龄
             div
-<<<<<<< HEAD
-              vue-slider(v-model="ageRange")
-=======
               vue-slider(v-model="ageRange", :min="15", :max="50")
->>>>>>> b9dac8bbf45b59c72b818ca1b678e15e7b4e5893
           div.sex
             span 性别
             div
