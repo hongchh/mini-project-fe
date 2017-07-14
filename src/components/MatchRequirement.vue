@@ -76,7 +76,7 @@ export default {
   height: 100%
   .toolbar
     height: .6rem
-    background: #12b7f5
+    background: rgb(35, 36, 40)
     display: flex
     align-items: center
     padding: 0 .2rem
