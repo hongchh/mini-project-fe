@@ -173,7 +173,7 @@ p
   .next
       width: 100%
       margin-top: .1rem
-      background: #12b7f5
+      background: rgb(255, 175, 2)
       font-size: .15rem
       border: none
       border-radius: .3rem

@@ -63,7 +63,7 @@ export default {
   height: 100%
   .toolbar
     height: .6rem
-    background: #12b7f5
+    background: rgb(35, 36, 40)
     display: flex
     align-items: center
     padding: 0 .2rem
@@ -102,7 +102,7 @@ export default {
     #next
       width: 100%
       margin-top: 1rem
-      background: #12b7f5
+      background: rgb(255, 175, 2)
       font-size: .15rem
       border: none
       border-radius: .3rem

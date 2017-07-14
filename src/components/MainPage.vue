@@ -165,7 +165,7 @@ p
   
   button
     width: 100%
-    background: #12b7f5
+    background: rgb(255, 175, 2)
     //margin-top: .3rem
     font-size: .15rem
     border: none

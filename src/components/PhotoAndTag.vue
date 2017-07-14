@@ -39,8 +39,8 @@ export default {
       // 为了避免点击事件被父元素拦截导致点击失效
       // 此处只能遍历判断点击位置是否点到了tag上
       if (type === 1) {
-        if (this.userTags.length > 3) {
-          alert('最多只能选择4个标签')
+        if (this.userTags.length > 2) {
+          alert('最多只能选择3个标签')
           return
         }
         for (let i = 0; i < this.sysTags.length; ++i) {
@@ -119,7 +119,7 @@ export default {
         white-space: nowrap
   button
     width: 100%
-    background: #12b7f5
+    background: rgb(255, 175, 2)
     margin: .3rem 0 .1rem 0
     font-size: .15rem
     border: none
@@ -129,7 +129,7 @@ export default {
     outline: none
   .take-photo
     font-size: .15rem
-    color: #12b7f5
+    color: #888
     text-align: center
     display: block
   .list-1-enter, .list-1-leave-to
