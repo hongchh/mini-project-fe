@@ -89,14 +89,14 @@ export default {
         alert('请选择性别')
       }
       // 提交表单
-      axios.post('/login', {
-        matchminage: this.ageRange[0],
-        matchmaxage: this.ageRange[1],
-        matchsex: this.sex
-      }).then(res => {
+      let data = new window.FormData()
+      data.append('openid', this.$route.query.openids)
+      data.append('matchminage', this.ageRange[0])
+      data.append('matchmaxage', this.ageRange[1])
+      data.append('matchsex', this.sex)
+      axios.post('/index.php/PersonCenter/modify', data).then(res => {
         if (res.status === 200) {
           this.hideMenu()
-          // this.$router.push('/main-page')
         }
       }).catch(e => {
         console.log(e)
