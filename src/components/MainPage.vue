@@ -3,7 +3,15 @@ div.main-page(@click.prevent="isShowMenu = false")
   UserMenu(:isShowMenu="isShowMenu" @parentHideMenu="hideMenu")
   div.user-mini-photo
     img(:class="isShowMenu ? 'move-right' : ''" src="../assets/QQ.jpg" @click.stop="showMenu")
-  img.user-photo(src="../assets/QQ.jpg")
+  //- img.user-photo(src="../assets/QQ.jpg")
+  div.ad-container
+    .banner-wraper#banner-wraper(ref="bannerWraper" :style="{width: bannerWraperWidth}"
+    @touchstart="touchStartHandler"
+    @touchmove="touchmoveHandler"
+    @touchend="touchEndHandler")
+      .banner-1.banner
+      .banner-2.banner
+      .banner-3.banner
   button(@click="takePhoto") {{ action }}
 </template>
 
@@ -53,6 +61,9 @@ p
   justify-content: space-between
   box-sizing: border-box
   padding: .1rem .2rem
+  .ad-container
+    overflow: hidden
+    height: 80%
   .user-mini-photo
     position: relative
     height: .5rem
@@ -67,21 +78,7 @@ p
       transition: all .8s ease-out
     .move-right
       left: 85%
-  .user-p
-    //flex-grow: 1
-    overflow: hidden
-    margin: .05rem
-    border: .01rem solid #888
-    max-height: 80%
-    .ad-wraper
-      overflow: hidden
-      .ad-one
-        float: left
-        height: 100%
-        width: 100%
-        img
-          // height: 100%
-          // width: 100%
+  
   button
     width: 100%
     background: #12b7f5

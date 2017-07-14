@@ -1,52 +1,47 @@
 <template lang="pug">
-  p.start-box
-    input(type="radio", name="a", value="0", checked="checked")
-    input(v-for="(score, i) in scores", value={score}, :key="i", name="a", type="radio")
+  .container
+    div.rate
+      Rate(v-model="lastScore")
+    button#evaluateBtn(@click="EvaluateSub") 提交评价
+
 </template>
 <script>
+import Vue from 'vue'
+import { Rate } from 'element-ui'
+import 'element-ui/lib/theme-default/index.css'
+Vue.use(Rate)
 export default {
   name: 'evaluate',
+  components: {
+    Rate
+  },
   data () {
     return {
-      scores: [1, 2, 3, 4, 5],
       lastScore: 0
     }
   },
-  methoods: {
-    starHandler () {
-      console.log(this.lastScore)
-      // this.lastScore = score
-      // console.log(score)
+  methods: {
+    EvaluateSub () {
+      // ...
     }
   }
 }
 </script>
 
 <style lang="sass">
-.start-box
+.container
+  display: flex
+  justify-content: space-around
+  flex-direction: column
+  height: 100%
   text-align: center
-  >input
-    position: relative
-    margin-right: .1rem
+  .rate
+    text-align: center
+  #evaluateBtn
+    margin: 0 auto
+    font-size: .2rem
     border: 0
-    background: transparent
-    color: gold
-    outline: none
-    -webkit-transition: color .3s
-    transition:color .3s
-  >input:nth-of-type(1)
-    display: none
-  >input:before
-    position: absolute
-    content: "★"
-    left: 0
-    top: 0
-    font-size: 32px
-    height: 100%
-    width: 100%
-    background: #FFF
-    cursor: pointer
-  >input:checked~input
-    color: #666
-
+    padding: .1rem
+    border-radius: 4px
+    width: 40%
 </style>
