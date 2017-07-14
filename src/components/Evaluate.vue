@@ -42,7 +42,7 @@ export default {
       height: .4rem
   #evaluateBtn
     margin: 0 auto
-    background: #12b7f5
+    background: rgb(255, 175, 2)
     font-size: .15rem
     border: none
     border-radius: .3rem

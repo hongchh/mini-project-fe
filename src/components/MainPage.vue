@@ -4,8 +4,8 @@ div.main-page(@click.prevent="isShowMenu = false")
   div.user-mini-photo
     img(:class="isShowMenu ? 'move-right' : ''" src="../assets/QQ.jpg" @click.stop="showMenu")
   div.ad-container(ref="adContainer")
-    div.ad-wraper(:style="width: adWraperWidth")
-      div.ad-one(:style="width: adOneWidth")
+    div.ad-wraper(style="width: adWraperWidth")
+      div.ad-one(style="width: adOneWidth")
         img(src="../assets/tab1.jpeg")
   button(@click="takePhoto") {{ action }}
 </template>
@@ -93,7 +93,7 @@ p
   
   button
     width: 100%
-    background: #12b7f5
+    background: rgb(255, 175, 2)
     //margin-top: .3rem
     font-size: .15rem
     border: none

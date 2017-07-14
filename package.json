@@ -16,11 +16,8 @@
   "dependencies": {
     "axios": "^0.16.2",
     "vue": "^2.3.3",
-<<<<<<< HEAD
     "vue-awesome-swiper": "^2.5.4",
     "vue-bootstrap-slider": "^1.1.0",
-=======
->>>>>>> 1e8388e3a4920408d614139426d6490cc58ae823
     "vue-router": "^2.3.1",
     "vue-simple-spinner": "^1.2.1",
     "vue-slider-component": "^2.3.3"

@@ -119,7 +119,7 @@ export default {
         white-space: nowrap
   button
     width: 100%
-    background: #12b7f5
+    background: rgb(255, 175, 2)
     margin: .3rem 0 .1rem 0
     font-size: .15rem
     border: none
