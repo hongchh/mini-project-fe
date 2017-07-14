@@ -78,7 +78,6 @@ export default {
   },
   mounted () {
     this.adwraperWidth = this.$refs.adContainer.offsetWidth * 3 + 'px'
-    console.log(this.adOnewidth)
     if (this.$route.query.photo) {
       document.getElementById('photo').setAttribute('src', this.$route.query.photo)
     }
