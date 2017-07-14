@@ -1,29 +1,29 @@
 <template lang="pug">
-  div(:class="isShowMenu ? 'user-menu showMenu' : 'user-menu'")
-    div(:class="isPrefer || isCount ? 'tab-wraper prefer' : 'tab-wraper'" @click.stop="")
+  div(:style="{height: tabWraperHeight}" :class="isShowMenu ? 'user-menu showMenu' : 'user-menu'")
+    div(:style="{height: tabWraperHeight}" :class="isPrefer || isCount ? 'tab-wraper tab-1-hide' : 'tab-wraper tab-1'" @click.stop="")
       div.tab-1.tab
         p(@click.stop="hideMenu") < 返回
         ul
           li(@click.stop="isPrefer = true") 偏好设置
           li(@click.stop="isCount = true") 账户
           li 分享给朋友
-      div(:class="isPrefer ? 'tab' : 'tab prefer-hide'")
-        p(@click.stop="lastMenu") < 返回
+      div(:class="isPrefer ? 'tab tab-2-show' : 'tab tab-2'" ref="tab2")
+        p(@click.stop="isPrefer = false") < 返回
         .info
           div.title
             span 为我匹配
           div.age
             span 年龄
             div
-              vue-slider(v-model="ageRange", :min="15", :max="50")
+              vue-slider(v-model="ageRange")
           div.sex
             span 性别
             div
               span.boy(:class="sex === 0 ? 'blue-text' : ''", @click.stop="sex = 0") 男 ♂
               span.girl(:class="sex === 1 ? 'red-text' : ''", @click.stop="sex = 1") 女 ♀
           button.next(@click="updateUserInfo")  确定
-      div(:class="isCount ? ' tab-3 tab tab3-show' : 'tab-3 tab'")
-        p(@click.stop="lastMenu") < 返回
+      div(:class="isCount ? 'tab tab-3 tab-3-show' : 'tab-3 tab tab-3-hide'")
+        p(@click.stop="isCount = false") < 返回
         div.count-money
           span 账户
           span.money {{countMoney}}
@@ -47,11 +47,15 @@ export default {
     return {
       isPrefer: false,
       isCount: false,
-      ageRange: [15, 15],
+      ageRange: [0, 100],
       sex: -1,
       countMoney: '￥' + 12.98,
-      totalIncome: '￥' + 52.88
+      totalIncome: '￥' + 52.88,
+      tabWraperHeight: 0
     }
+  },
+  mounted () {
+    this.tabWraperHeight = this.$refs.tab2.offsetHeight + 'px'
   },
   methods: {
     hideMenu () {
@@ -81,11 +85,6 @@ export default {
         alert('提交匹配要求失败，请重新尝试')
       })
     }
-  },
-  mounted () {
-    var dots = document.querySelectorAll('.vue-slider-dot')
-    dots[0].setAttribute('style', 'width: 35px; height: 35px; top: -15px; transition-duration: 0s; transform: translateX(-8px);')
-    dots[1].setAttribute('style', 'width: 35px; height: 35px; top: -15px; transition-duration: 0s; transform: translateX(-8px);')
   }
 }
 </script>
@@ -100,7 +99,8 @@ p
 .user-menu
   position: absolute
   top: 0
-  left: -100%
+  top: -100%
+  left: 0
   z-index: 999
   overflow: hidden
   width: 80%
@@ -112,15 +112,23 @@ p
   transition: all .8s ease-out
   .tab-wraper
     position: relative
-    width: 200%
+    width: 100%
     height: 100%
     overflow: hidden
     transition: all .8s ease-out
     .tab
-      float: left
-      padding: 5%
-      width: 40%
+      position: absolute
+      //padding: 5%
+      top: 0
+      left: 0
+      width: 100%
+      background: #000
+      p
+        padding: .1rem
     .tab-1
+      position: absolute
+      z-index: 1
+      height: 100%
       li
         padding: .1rem
       span 
@@ -128,24 +136,30 @@ p
         width: .03rem
         height: .03rem
         background: #ffffff
+    .tab-1-hide
+      z-index: -1
+    .tab-2
+      z-index: -1
+    .tab-2-show
+      z-index: 1
     .tab-3
       position: absolute
-      right: 0
-      display: none
+      height: 100%
       .count-money
         margin-top: .2rem
       div
         padding: .2rem
         .money
           float: right
-    .tab3-show
-        display: block  
+    .tab-3-hide
+      z-index: -2
+    .tab-3-show
+      z-index: 1 
   .prefer
     transform: translate(-50%, 0)
   .prefer-hide
-    display: none
 .showMenu
-  left: 0
+  top: 0
 
 .info
   flex-grow: 1
@@ -177,7 +191,7 @@ p
       color: #faa523
   .next
       width: 100%
-      margin-top: .1rem
+      margin: .1rem 0
       background: rgb(255, 175, 2)
       font-size: .15rem
       border: none
