@@ -117,14 +117,14 @@ p
         height: 100%
         width: 33.33333333%
       .banner-1
-        background: url("../assets/tab1.jpeg")
+        background: url("../assets/ad1.jpg")
         background-size: 100% 100%
       .banner-2
-        background: url("../assets/tab2.jpeg")
+        background: url("../assets/ad2.jpg")
         background-size: 100% 100%
       .banner-3
         position: relative
-        background: url("../assets/tab3.jpeg")
+        background: url("../assets/ad3.jpg")
         background-size: 100% 100%
     .ad-wraper
       height: 100%
