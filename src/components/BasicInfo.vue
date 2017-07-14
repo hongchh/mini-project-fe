@@ -1,7 +1,7 @@
 <template lang="pug">
 div.basic-info
   div.toolbar
-    span.back(@click="relogin") 返回
+    span.back(@click="$router.replace('/select-login')") 返回
     span.title 填写资料
     span.place-holder 占位
   div.age-and-sex

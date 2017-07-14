@@ -8,7 +8,7 @@ div.waiting
 
 <script>
 import Spinner from 'vue-simple-spinner'
-import axios from 'axios'
+// import axios from 'axios'
 
 export default {
   name: 'waiting',
@@ -28,7 +28,7 @@ export default {
           stars[i].setAttribute('style', 'top: ' + top + '%; opacity: 1; left: ' + left + '%')
         }
         setTimeout(() => {
-          window.TalkNative.talkWith(data)
+          window.TalkNative.talkWith(data.openid, data.nickname)
         }, 1000)
       }, 500)
     }
@@ -36,13 +36,17 @@ export default {
   mounted () {
     console.log(this.$route.query.tags)
     // TODO: 发送请求给服务器获取匹配对象, 调起Native聊天
-    axios.get('/index.php/mood/getMatchedUser').then(res => {
-      console.log(res.data.data)
-      this.chat(res.data.data)
-    }).catch(e => {
-      console.log(e)
-      alert('匹配失败')
+    this.chat({
+      openid: '0000',
+      nickname: '开心的小猪'
     })
+    // axios.get('/index.php/mood/getMatchedUser').then(res => {
+    //   console.log(res.data.data)
+    //   this.chat(res.data.data)
+    // }).catch(e => {
+    //   console.log(e)
+    //   alert('匹配失败')
+    // })
   }
 }
 </script>
