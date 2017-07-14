@@ -73,7 +73,7 @@ export default {
         alert('请选择标签')
         return
       }
-      this.$router.push('/waiting?tags=' + this.userTags.join(','))
+      this.$router.push('/waiting?tags=' + this.userTags.join(',') + '&expression=' + this.$route.query.expression)
     }
   }
 }

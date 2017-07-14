@@ -55,10 +55,14 @@ export default {
       data.append('matchsex', this.sex)
       axios.post('/index.php/login/userlogin', data).then(res => {
         if (res.status === 200) {
-          this.$router.replace('/main-page')
+          this.$router.replace('/main-page?error=0&openid=' + sessionStorage.openid)
+          window.FirstLoginNative.isLoginSuccess(true)
+        } else {
+          window.FirstLoginNative.isLoginSuccess(false)
         }
       }).catch(e => {
         console.log(e)
+        window.FirstLoginNative.isLoginSuccess(false)
         alert('提交匹配要求失败，请重新尝试')
       })
     }
