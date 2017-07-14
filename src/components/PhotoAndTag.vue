@@ -5,10 +5,10 @@ div.photo-and-tag
       img(:src="$route.query.photo")
       div.nickname {{ nickname }}
     transition-group.tags(name="list-1", tag="div")
-      span.tag(v-for="(tag, i) in userTags", :id="'user-' + i", :key="tag") {{ tag }}
+      span.tag(v-for="(tag, i) in userTags", :id="'user-' + i", :key="tag", :style="'background: #' + config.tagColor[i]") {{ tag }}
     div.info 点击标签添加
     transition-group.tags(name="list-2", tag="div")
-      span.tag(v-for="(tag, i) in sysTags", :id="'sys-' + i", :key="tag") {{ tag }}
+      span.tag(v-for="(tag, i) in sysTags", :id="'sys-' + i", :key="tag", :style="'background: #' + config.tagColor[i]") {{ tag }}
   button(@click="match") 开始匹配
   span.take-photo(@click="takePhoto") 不满意？重新拍一张
 </template>
@@ -19,12 +19,14 @@ import Conf from '../config'
 export default {
   name: 'photo-and-tag',
   data () {
+    console.log(Conf)
     let tags = this.$route.query.tags
     tags = tags ? tags.substr(0, tags.length - 1).split(',') : []
     return {
       nickname: this.$route.query.nickname || '',
       userTags: tags,
-      sysTags: Conf.systemTags
+      sysTags: Conf.systemTags,
+      config: Conf
     }
   },
   mounted () {
@@ -112,7 +114,8 @@ export default {
         font-size: .12rem
         padding: .05rem .08rem
         margin: 0 .05rem
-        border: .01rem solid #12b7f5
+        color: white
+        // border: .01rem solid #12b7f5
         border-radius: .1rem
         z-index: 99
         transition: all 1s

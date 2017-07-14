@@ -17,9 +17,12 @@ export default {
     Spinner
   },
   data () {
-    return {
-      xiaohua: '“为什么大冷天人很难出被窝？”“因为冰系魔法通常带有禁锢效果。”'
-    }
+    let xiaohua = this.$route.query.expression < 30
+      ? '和尚不能吃肉，好多都偏胖；道士可以吃肉，好多都是瘦子，我陷入了沉思。。。'
+      : this.$route.query.expression < 60
+      ? '职场就是这样，把自己累成狗的永远干不过那些把自己伪装成狗的。'
+      : '“为什么大冷天人很难出被窝？”“因为冰系魔法通常带有禁锢效果。”'
+    return { xiaohua }
   },
   methods: {
     chat (data) {
