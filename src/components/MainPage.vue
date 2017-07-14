@@ -117,15 +117,15 @@ p
         height: 100%
         width: 33.33333333%
       .banner-1
-        background: url("../assets/adver1.jpg")
-        background-size: 100% 100%
+        background: url("../assets/adver1.jpg") no-repeat
+        background-size: cover
       .banner-2
-        background: url("../assets/adver2.jpg")
-        background-size: 100% 100%
+        background: url("../assets/adver2.jpg") no-repeat
+        background-size: cover
       .banner-3
         position: relative
-        background: url("../assets/adver3.jpg")
-        background-size: 100% 100%
+        background: url("../assets/adver3.jpg") no-repeat
+        background-size: cover
     .ad-wraper
       height: 100%
     img
