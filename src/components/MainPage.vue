@@ -3,30 +3,26 @@ div.main-page(@click.prevent="isShowMenu = false")
   UserMenu(:isShowMenu="isShowMenu" @parentHideMenu="hideMenu")
   div.user-mini-photo
     img(:class="isShowMenu ? 'move-right' : ''" src="../assets/QQ.jpg" @click.stop="showMenu")
-  //- img.user-photo(src="../assets/QQ.jpg")
-  div.ad-container
-    swiper(:options="swiperOption")
-      swiper-slide(v-for="slide in swiperSlides") 
+  div.ad-container(ref="adContainer")
+    div.ad-wraper(:style="width: adWraperWidth")
+      div.ad-one(:style="width: adOneWidth")
         img(src="../assets/tab1.jpeg")
-      div.swiper-pagination(slot="pagination")
   button(@click="takePhoto") {{ action }}
 </template>
 
 <script>
-import UserMenu from './UserMenu1'
-import { swiper, swiperSlide } from 'vue-awesome-swiper'
-
+import UserMenu from './UserMenu'
 export default {
   name: 'main-page',
   components: {
-    UserMenu,
-    swiper,
-    swiperSlide
+    UserMenu
   },
   data () {
     return {
       action: this.$route.query.error ? '照片无效请重拍' : '拍照并上传',
       isShowMenu: false,
+      adwraperWidth: this.$refs.adContainer.offsetWidth + 'px',
+      adOnewidth: this.adwraperWidth * 0.333333 + 'px',
       swiperOption: {
         autoplay: 3500,
         setWrapperSize: true,
@@ -75,6 +71,8 @@ p
     overflow: hidden
     height: 80%
     width: 100%
+    .ad-wraper
+      height: 100%
     img
       width: 100%
       height: 100%
