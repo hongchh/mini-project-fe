@@ -3,20 +3,15 @@ div.main-page(@click.prevent="isShowMenu = false")
   UserMenu(:isShowMenu="isShowMenu" @parentHideMenu="hideMenu")
   div.user-mini-photo
     img(:class="isShowMenu ? 'move-right' : ''" src="../assets/QQ.jpg" @click.stop="showMenu")
-  //- img.user-photo(src="../assets/QQ.jpg")
-  div.ad-container
-    .banner-wraper#banner-wraper(ref="bannerWraper" :style="{width: bannerWraperWidth}"
-    @touchstart="touchStartHandler"
-    @touchmove="touchmoveHandler"
-    @touchend="touchEndHandler")
-      .banner-1.banner
-      .banner-2.banner
-      .banner-3.banner
+  div.ad-container(ref="adContainer")
+    div.ad-wraper(:style="width: adWraperWidth")
+      div.ad-one(:style="width: adOneWidth")
+        img(src="../assets/tab1.jpeg")
   button(@click="takePhoto") {{ action }}
 </template>
 
 <script>
-import UserMenu from './UserMenu1'
+import UserMenu from './UserMenu'
 export default {
   name: 'main-page',
   components: {
@@ -25,7 +20,18 @@ export default {
   data () {
     return {
       action: this.$route.query.error ? '照片无效请重拍' : '拍照并上传',
-      isShowMenu: false
+      isShowMenu: false,
+      adwraperWidth: this.$refs.adContainer.offsetWidth + 'px',
+      adOnewidth: this.adwraperWidth * 0.333333 + 'px',
+      swiperOption: {
+        autoplay: 3500,
+        setWrapperSize: true,
+        pagination: '.swiper-pagination',
+        paginationClickable: true,
+        mousewheelControl: true,
+        observeParents: true
+      },
+      swiperSlides: [1, 2, 3]
     }
   },
   methods: {
@@ -64,6 +70,12 @@ p
   .ad-container
     overflow: hidden
     height: 80%
+    width: 100%
+    .ad-wraper
+      height: 100%
+    img
+      width: 100%
+      height: 100%
   .user-mini-photo
     position: relative
     height: .5rem
