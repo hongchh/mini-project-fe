@@ -7,6 +7,8 @@
 
 </template>
 <script>
+import axios from 'axios'
+
 export default {
   name: 'evaluate',
   data () {
@@ -20,6 +22,16 @@ export default {
     },
     EvaluateSub () {
       console.log(this.$route.query.openidA, this.$route.query.openidB)
+      let data = new window.FormData()
+      data.append('openidA', this.$route.query.openidA)
+      data.append('openidB', this.$route.query.openidB)
+      data.append('score', this.rating)
+      axios.post('/index.php/', data).then(res => {
+        this.$router.replace('/main-page?openid=' + this.$route.query.openidA)
+      }).catch(e => {
+        console.log(e)
+        alert('评价失败')
+      })
     }
   }
 }
