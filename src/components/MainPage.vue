@@ -135,8 +135,8 @@ p
     transform: translate(-50%, 0)
     li
       float: left
-      width: .1rem
-      height: .1rem
+      width: .05rem
+      height: .05rem
       margin: .05rem
       border-radius: 50%
       list-style: none
