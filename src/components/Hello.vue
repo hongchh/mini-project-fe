@@ -52,7 +52,6 @@ export default {
       this.isCurrent = this.isCurrent.map(function (item) {
         return false
       })
-
       this.isCurrent[this.slideCurr] = true
     }
   }

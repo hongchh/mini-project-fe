@@ -1,21 +1,24 @@
 <template lang="pug">
-div.main-page(@click.prevent="isShowMenu = false")
-  UserMenu(:isShowMenu="isShowMenu" @parentHideMenu="hideMenu")
-  div.user-mini-photo
-    img(:class="isShowMenu ? 'move-right' : ''" src="../assets/QQ.jpg" @click.stop="showMenu")
-  div.ad-container(ref="adContainer")
-    .banner-wraper(ref="bannerWraper" :style="{width: adwraperWidth}"
-    @touchstart="touchStartHandler"
-    @touchmove="touchmoveHandler"
-    @touchend="touchEndHandler")
-      .banner-1.banner
-      .banner-2.banner
-      .banner-3.banner
-    #dot-box
-      li.dot-not-curr(:class="{dotCurr: isCurrent[0]}")
-      li.dot-not-curr(:class="{dotCurr: isCurrent[1]}")
-      li.dot-not-curr(:class="{dotCurr: isCurrent[2]}")
-  button(@click="takePhoto") {{ action }}
+div.wraper
+  div.toolbar
+    span.title 拍照上传
+  div.main-page(@click.prevent="isShowMenu = false")
+    UserMenu(:isShowMenu="isShowMenu" @parentHideMenu="hideMenu")
+    div.user-mini-photo
+      img(:class="isShowMenu ? 'move-right' : ''" src="../assets/QQ.jpg" @click.stop="showMenu")
+    div.ad-container(ref="adContainer")
+      .banner-wraper(ref="bannerWraper" :style="{width: adwraperWidth}"
+      @touchstart="touchStartHandler"
+      @touchmove="touchmoveHandler"
+      @touchend="touchEndHandler")
+        .banner-1.banner
+        .banner-2.banner
+        .banner-3.banner
+      #dot-box
+        li.dot-not-curr(:class="{dotCurr: isCurrent[0]}")
+        li.dot-not-curr(:class="{dotCurr: isCurrent[1]}")
+        li.dot-not-curr(:class="{dotCurr: isCurrent[2]}")
+    button(@click="takePhoto") {{ action }}
 </template>
 
 <script>
@@ -65,19 +68,33 @@ export default {
       } else if (this.moveX < 0) {
         this.slideCurr ++
       }
-
       this.slideCurr = this.slideCurr < 0 ? 0 : this.slideCurr
       this.slideCurr = this.slideCurr > 2 ? 2 : this.slideCurr
       this.$refs.bannerWraper.style.left = -this.slideCurr * 100 + '%'
       this.isCurrent = this.isCurrent.map(function (item) {
         return false
       })
-
       this.isCurrent[this.slideCurr] = true
+    },
+    anim () {
+      setInterval(() => {
+        if (this.slideCurr < 2) {
+          this.slideCurr ++
+          this.$refs.bannerWraper.style.left = -this.slideCurr * 100 + '%'
+        } else {
+          this.$refs.bannerWraper.style.left = 0
+          this.slideCurr = 0
+        }
+        this.isCurrent = this.isCurrent.map(function (item) {
+          return false
+        })
+        this.isCurrent[this.slideCurr] = true
+      }, 3000)
     }
   },
   mounted () {
     this.adwraperWidth = this.$refs.adContainer.offsetWidth * 3 + 'px'
+    this.anim()
   }
 }
 </script>
@@ -88,13 +105,24 @@ ul
 p
   padding: 0
   margin: 0
+.wraper
+  height: 100%
+  .toolbar
+    position: absolute
+    padding: .18rem 0
+    background: rgb(35, 36, 40)
+    text-align: center
+    width: 100%
+    font-size: .15rem
+    span
+      color: white
 .main-page
   height: 100%
   display: flex
   flex-direction: column
   justify-content: space-between
   box-sizing: border-box
-  padding: .1rem .2rem
+  padding: 0 .2rem .1rem
   .ad-container
     position: relative
     overflow: hidden
@@ -152,6 +180,7 @@ p
     img
       position: absolute
       left: 0
+      top: .03rem
       width: .5rem
       height: .5rem
       border: 1px solid #eee
