@@ -32,7 +32,7 @@
           span 累计收入
           span.money {{totalIncome}}
       div(:class="isMood ? 'tab tab-4 tab-4-show' : 'tab tab-4'")
-        p(@click.stop="isMood = false") < 返回
+        p(@click.stop="moodBack") < 返回
         div.content
           p 心情图谱
           p 你这个月的心情图谱是
@@ -65,8 +65,19 @@ export default {
       sex: -1,
       countMoney: '￥' + 12.98,
       totalIncome: '￥' + 52.88,
-      tabWraperHeight: 0
+      tabWraperHeight: 0,
+      monthMood: 0
     }
+  },
+  created () {
+    // axios.get('/index.php/', data).then(res => {
+    //   if (res.status === 200) {
+    //     console.log(res)
+    //     this.monthMood = res
+    //   }
+    // }).catch(e => {
+    //   console.log(e)
+    // })
   },
   mounted () {
     this.tabWraperHeight = this.$refs.tab2.offsetHeight
@@ -84,13 +95,17 @@ export default {
       this.isMood = true
       this.tabWraperHeight = this.tabWraperHeight * 2
     },
+    moodBack () {
+      this.isMood = false
+      this.tabWraperHeight = this.tabWraperHeight / 2
+    },
     updateUserInfo () {
       if (this.sex === -1) {
         alert('请选择性别')
       }
       // 提交表单
       let data = new window.FormData()
-      data.append('openid', this.$route.query.openids)
+      data.append('openid', this.$route.query.openid)
       data.append('matchminage', this.ageRange[0])
       data.append('matchmaxage', this.ageRange[1])
       data.append('matchsex', this.sex)

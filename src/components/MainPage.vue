@@ -101,6 +101,7 @@ p
     margin: .2rem 0
     height: 100%
     width: 100%
+    border-radius: 5px
     .banner-wraper
       position: absolute
       left: 0
@@ -135,8 +136,8 @@ p
     transform: translate(-50%, 0)
     li
       float: left
-      width: .1rem
-      height: .1rem
+      width: .05rem
+      height: .05rem
       margin: .05rem
       border-radius: 50%
       list-style: none
