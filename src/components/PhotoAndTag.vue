@@ -5,10 +5,10 @@ div.photo-and-tag
       img(:src="$route.query.photo")
       div.nickname {{ nickname }}
     transition-group.tags(name="list-1", tag="div")
-      span.tag(v-for="(tag, i) in userTags", :id="'user-' + i", :key="tag", :style="'background: #' + tagColor[i]") {{ tag }}
+      span.tag(v-for="(tag, i) in userTags", :id="'user-' + i", :key="tag", :style="'background: #' + tagColor[tag]") {{ tag }}
     div.info 点击标签添加
     transition-group.tags(name="list-2", tag="div")
-      span.tag(v-for="(tag, i) in sysTags", :id="'sys-' + i", :key="tag", :style="'background: #' + tagColor[i]") {{ tag }}
+      span.tag(v-for="(tag, i) in sysTags", :id="'sys-' + i", :key="tag", :style="'background: #' + tagColor[tag]") {{ tag }}
   button(@click="match") 开始匹配
   span.take-photo(@click="takePhoto") 不满意？重新拍一张
 </template>
