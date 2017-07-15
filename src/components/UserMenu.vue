@@ -36,7 +36,7 @@
         div.content
           p 心情图谱
           p 你这个月的心情图谱是
-          p {{ currentData.mood }}
+          p.mood {{ currentData.mood }}
           p {{ currentData.content }}
           div.img-container
             a(:href="currentData.url || ''")
@@ -110,7 +110,7 @@ export default {
           } else if (res <= 100) {
             self.currentData = Con.monthMood['exciting']
           } else {
-            self.currentData = Con.monthMood['default']
+            self.currentData = Con.monthMood['sad']
           }
         }
       }).catch(e => {
@@ -205,12 +205,22 @@ p
       z-index: -2
     .tab-3-show
       z-index: 1 
+    .tab-4
+      position: absolute
+      height: 100%
     .tab-4-show
       z-index: 1
     .tab-4-hide
       z-index: -1
     .content
       text-align: center
+      padding: 0 .2rem
+      height: 100%
+      .img-container
+        position: absolute
+        bottom: .1rem
+      .mood
+        border-bottom: 1px solid #fff
       a
         padding: 5%
       img
