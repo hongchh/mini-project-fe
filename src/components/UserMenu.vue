@@ -90,7 +90,7 @@ export default {
       }
       // 提交表单
       let data = new window.FormData()
-      data.append('openid', this.$route.query.openids)
+      data.append('openid', this.$route.query.openid)
       data.append('matchminage', this.ageRange[0])
       data.append('matchmaxage', this.ageRange[1])
       data.append('matchsex', this.sex)
