@@ -5,10 +5,10 @@ div.photo-and-tag
       img(:src="$route.query.photo")
       div.nickname {{ nickname }}
     transition-group.tags(name="list-1", tag="div")
-      span.tag(v-for="(tag, i) in userTags", :id="'user-' + i", :key="tag", :style="'background: #' + config.tagColor[i]") {{ tag }}
+      span.tag(v-for="(tag, i) in userTags", :id="'user-' + i", :key="tag", :style="'background: #' + tagColor[i]") {{ tag }}
     div.info 点击标签添加
     transition-group.tags(name="list-2", tag="div")
-      span.tag(v-for="(tag, i) in sysTags", :id="'sys-' + i", :key="tag", :style="'background: #' + config.tagColor[i]") {{ tag }}
+      span.tag(v-for="(tag, i) in sysTags", :id="'sys-' + i", :key="tag", :style="'background: #' + tagColor[i]") {{ tag }}
   button(@click="match") 开始匹配
   span.take-photo(@click="takePhoto") 不满意？重新拍一张
 </template>
@@ -19,14 +19,25 @@ import Conf from '../config'
 export default {
   name: 'photo-and-tag',
   data () {
-    console.log(Conf)
-    let tags = this.$route.query.tags
-    tags = tags ? tags.substr(0, tags.length - 1).split(',') : []
+    let userTags = this.$route.query.tags
+    let sysTags = []
+    let find = false
+    userTags = userTags ? userTags.substr(0, userTags.length - 1).split(',') : []
+    for (let i = 0; i < Conf.systemTags.length; ++i) {
+      for (let j = 0; j < userTags.length; ++j) {
+        if (userTags[j] === Conf.systemTags[i]) {
+          find = true
+          break
+        }
+      }
+      if (!find) sysTags.push(Conf.systemTags[i])
+      find = false
+    }
     return {
       nickname: this.$route.query.nickname || '',
-      userTags: tags,
-      sysTags: Conf.systemTags,
-      config: Conf
+      userTags: userTags,
+      sysTags: sysTags,
+      tagColor: Conf.tagColor
     }
   },
   mounted () {
