@@ -101,6 +101,7 @@ p
     margin: .2rem 0
     height: 100%
     width: 100%
+    border-radius: 5px
     .banner-wraper
       position: absolute
       left: 0
