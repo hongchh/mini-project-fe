@@ -16,7 +16,7 @@
           div.age
             span 年龄
             div
-              vue-slider(v-model="ageRange")
+              vue-slider(v-model="ageRange", :min="15", :max="50")
           div.sex
             span 性别
             div
@@ -59,22 +59,25 @@ export default {
   },
   mounted () {
     this.tabWraperHeight = this.$refs.tab2.offsetHeight
+    var dots = document.querySelectorAll('.vue-slider-dot')
+    dots[0].setAttribute('style', 'width: 30px; height: 30px; top: -12px; transition-duration: 0s; transform: translateX(-8px);')
+    dots[1].setAttribute('style', 'width: 30px; height: 30px; top: -12px; transition-duration: 0s; transform: translateX(-8px);')
   },
   data () {
     return {
       isPrefer: false,
       isCount: false,
       isMood: false,
-      ageRange: [0, 100],
+      ageRange: [15, 50],
       sex: -1,
-      countMoney: '￥' + 12.98,
-      totalIncome: '￥' + 52.88,
+      countMoney: '',
+      totalIncome: '',
       tabWraperHeight: 0,
-      currentData: Con.monthMood['sad']
+      currentData: Con.monthMood['default']
     }
   },
   created () {
-    console.log(this.currentData)
+    this.getCount()
     this.getMood()
   },
   methods: {
@@ -95,12 +98,12 @@ export default {
       this.tabWraperHeight = this.tabWraperHeight / 2
     },
     getMood () {
-      let monthMoodUrl = '/index.php/mood/getRecentMood?openid=' + this.$route.query.openid
+      let monthMoodUrl = '/index.php/mood/getRecentMood/' + this.$route.query.openid
       let self = this
       axios.get(monthMoodUrl).then(res => {
         if (res.status === 200) {
-          console.log(res)
-          let ret = res.data
+          let ret = res.data.data
+          console.log(ret.data)
           if (ret < 24) {
             self.currentData = Con.monthMood['sad']
           } else if (ret < 49) {
@@ -110,11 +113,21 @@ export default {
           } else if (res <= 100) {
             self.currentData = Con.monthMood['exciting']
           } else {
-            self.currentData = Con.monthMood['sad']
+            self.currentData = Con.monthMood['default']
           }
         }
       }).catch(e => {
         console.log(e)
+      })
+    },
+    getCount () {
+      let self = this
+      axios.get('/index.php/value/getcount/' + self.$route.query.openid).then(res => {
+        if (res.status === 200) {
+          console.log(res.data.data)
+          this.countMoney = '￥' + res.data.data.count
+          this.totalIncome = '￥' + res.data.data.income
+        }
       })
     },
     updateUserInfo () {
