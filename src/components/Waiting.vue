@@ -48,7 +48,12 @@ export default {
     //   openid: '0000',
     //   nickname: '开心的小猪'
     // })
-    axios.get('/index.php/mood/getMatchedUser').then(res => {
+    let data = new window.FormData()
+    let tags = this.$route.query.tags.split(',')
+    data.append('tag1', tags[0])
+    data.append('likemood', tags[1])
+    data.append('openid', this.$route.query.openid)
+    axios.post('/index.php/mood/match', data).then(res => {
       console.log(res.data.data)
       // this.chat(res.data.data.openid, res.data.data.nickname)
     }).catch(e => {
