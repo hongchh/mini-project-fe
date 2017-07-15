@@ -39,15 +39,23 @@ export default {
           window.TalkNative.talkWith(openid, nickname)
         }, 1000)
       }, 500)
+    },
+    getMatch () {
+      let data = new window.FormData()
+      data.append('openid', this.$route.query.openid)
+      axios.post('/index.php/mood/getmatch', data).then(res => {
+        if (res.data.status === 200) {
+          this.chat(res.data.data.idb, res.data.data.nickname)
+        } else {
+          setTimeout(() => { this.getMatch() }, 1000)
+        }
+      }).catch(e => {
+        setTimeout(() => { this.getMatch() }, 1000)
+      })
     }
   },
   mounted () {
     console.log(this.$route.query.tags)
-    // TODO: 发送请求给服务器获取匹配对象, 调起Native聊天
-    // this.chat({
-    //   openid: '0000',
-    //   nickname: '开心的小猪'
-    // })
     let data = new window.FormData()
     let tags = this.$route.query.tags.split(',')
     data.append('tag1', tags[0])
@@ -55,7 +63,7 @@ export default {
     data.append('openid', this.$route.query.openid)
     axios.post('/index.php/mood/match', data).then(res => {
       console.log(res.data.data)
-      // this.chat(res.data.data.openid, res.data.data.nickname)
+      this.getMatch()
     }).catch(e => {
       console.log(e)
       alert('匹配失败')

@@ -19,7 +19,7 @@ export default {
       this.rating = Number.parseInt(event.target.id)
     },
     EvaluateSub () {
-      // ...
+      console.log(this.$route.query.openidA, this.$route.query.openidB)
     }
   }
 }
