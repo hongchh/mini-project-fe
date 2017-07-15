@@ -65,19 +65,33 @@ export default {
       } else if (this.moveX < 0) {
         this.slideCurr ++
       }
-
       this.slideCurr = this.slideCurr < 0 ? 0 : this.slideCurr
       this.slideCurr = this.slideCurr > 2 ? 2 : this.slideCurr
       this.$refs.bannerWraper.style.left = -this.slideCurr * 100 + '%'
       this.isCurrent = this.isCurrent.map(function (item) {
         return false
       })
-
       this.isCurrent[this.slideCurr] = true
+    },
+    anim () {
+      setInterval(() => {
+        if (this.slideCurr < 2) {
+          this.slideCurr ++
+          this.$refs.bannerWraper.style.left = -this.slideCurr * 100 + '%'
+        } else {
+          this.$refs.bannerWraper.style.left = 0
+          this.slideCurr = 0
+        }
+        this.isCurrent = this.isCurrent.map(function (item) {
+          return false
+        })
+        this.isCurrent[this.slideCurr] = true
+      }, 3000)
     }
   },
   mounted () {
     this.adwraperWidth = this.$refs.adContainer.offsetWidth * 3 + 'px'
+    this.anim()
   }
 }
 </script>
