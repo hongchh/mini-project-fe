@@ -27,7 +27,7 @@ export default {
   },
   data () {
     return {
-      action: this.$route.query.error ? '照片无效请重拍' : '拍照并上传',
+      action: Number.parseInt(this.$route.query.error) === 1 ? '照片无效请重拍' : '拍照并上传',
       isShowMenu: false,
       adwraperWidth: 0,
       startX: 0,
