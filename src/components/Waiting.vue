@@ -9,7 +9,7 @@ div.waiting
 
 <script>
 import Spinner from 'vue-simple-spinner'
-// import axios from 'axios'
+import axios from 'axios'
 
 export default {
   name: 'waiting',
@@ -24,7 +24,7 @@ export default {
     return { xiaohua }
   },
   methods: {
-    chat (data) {
+    chat (openid, nickname) {
       let style = 'transform: scale(1.2); opacity: 1;'
       document.getElementById('success-log').setAttribute('style', style)
       setTimeout(() => {
@@ -36,7 +36,7 @@ export default {
           stars[i].setAttribute('style', 'top: ' + top + '%; opacity: 1; left: ' + left + '%')
         }
         setTimeout(() => {
-          window.TalkNative.talkWith(data.openid, data.nickname)
+          window.TalkNative.talkWith(openid, nickname)
         }, 1000)
       }, 500)
     }
@@ -48,13 +48,13 @@ export default {
     //   openid: '0000',
     //   nickname: '开心的小猪'
     // })
-    // axios.get('/index.php/mood/getMatchedUser').then(res => {
-    //   console.log(res.data.data)
-    //   this.chat(res.data.data)
-    // }).catch(e => {
-    //   console.log(e)
-    //   alert('匹配失败')
-    // })
+    axios.get('/index.php/mood/getMatchedUser').then(res => {
+      console.log(res.data.data)
+      // this.chat(res.data.data.openid, res.data.data.nickname)
+    }).catch(e => {
+      console.log(e)
+      alert('匹配失败')
+    })
   }
 }
 </script>
