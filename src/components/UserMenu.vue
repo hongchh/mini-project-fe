@@ -36,18 +36,19 @@
         div.content
           p 心情图谱
           p 你这个月的心情图谱是
-          p 郁郁寡欢
-          p 再计较的事，多年后看来也不过是个不足挂齿的玩笑，再悲伤的事，多年后想起也不过是段可供回忆的往事，再困难的事，多年后怎么都觉得轻而易举，不快的总会过去，心脏只有那么小，总会让开心占据多一点空间，把不开心统统扫到一边，毕竟它们不过是细小的尘埃而已
+          p {{ currentData.mood }}
+          p {{ currentData.content }}
           div.img-container
-            a(href="https://item.jd.com/11963221.html")
-              img(src="../assets/left.jpg", alt="所有失去的都会以另一种方式归来")
-            a(href="https://detail.tmall.com/item.htm?spm=a230r.1.14.62.ebb2eb2n2ZMbc&id=522784907853&ns=1&abbucket=19")
-              img(src="../assets/right.jpg", alt="世界如此复杂，你要内心强大")
+            a(:href="currentData.url || ''")
+              img(:src="currentData.imgs[0].src || ''", :alt="currentData.imgs[0].alt")
+            a(:href="currentData.url[1]")
+              img(:src="currentData.imgs[1].src", :alt="currentData.imgs[1].alt")
 </template>
 
 <script>
 import VueSlider from 'vue-slider-component'
 import axios from 'axios'
+import Con from '../config.js'
 export default {
   name: 'user-menu',
   components: {
@@ -55,6 +56,9 @@ export default {
   },
   props: {
     isShowMenu: false
+  },
+  mounted () {
+    this.tabWraperHeight = this.$refs.tab2.offsetHeight
   },
   data () {
     return {
@@ -66,21 +70,12 @@ export default {
       countMoney: '￥' + 12.98,
       totalIncome: '￥' + 52.88,
       tabWraperHeight: 0,
-      monthMood: 0
+      currentData: Con.monthMood['sad']
     }
   },
   created () {
-    // axios.get('/index.php/', data).then(res => {
-    //   if (res.status === 200) {
-    //     console.log(res)
-    //     this.monthMood = res
-    //   }
-    // }).catch(e => {
-    //   console.log(e)
-    // })
-  },
-  mounted () {
-    this.tabWraperHeight = this.$refs.tab2.offsetHeight
+    console.log(this.currentData)
+    this.getMood()
   },
   methods: {
     hideMenu () {
@@ -98,6 +93,29 @@ export default {
     moodBack () {
       this.isMood = false
       this.tabWraperHeight = this.tabWraperHeight / 2
+    },
+    getMood () {
+      let monthMoodUrl = '/index.php/mood/getRecentMood?openid=' + this.$route.query.openid
+      let self = this
+      axios.get(monthMoodUrl).then(res => {
+        if (res.status === 200) {
+          console.log(res)
+          let ret = res.data
+          if (ret < 24) {
+            self.currentData = Con.monthMood['sad']
+          } else if (ret < 49) {
+            self.currentData = Con.monthMood['normal']
+          } else if (ret < 64) {
+            self.currentData = Con.monthMood['happy']
+          } else if (res <= 100) {
+            self.currentData = Con.monthMood['exciting']
+          } else {
+            self.currentData = Con.monthMood['default']
+          }
+        }
+      }).catch(e => {
+        console.log(e)
+      })
     },
     updateUserInfo () {
       if (this.sex === -1) {
