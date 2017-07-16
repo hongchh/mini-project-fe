@@ -84,6 +84,8 @@ export default {
     hideMenu () {
       this.$emit('parentHideMenu', false)
       this.isShowMenu = false
+      this.isPrefer = false
+      this.isCount = false
     },
     lastMenu () {
       this.isCount = false
