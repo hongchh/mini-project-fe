@@ -5,7 +5,7 @@ div.wraper
   div.main-page(@click.prevent="isShowMenu = false")
     UserMenu(:isShowMenu="isShowMenu" @parentHideMenu="hideMenu")
     div.user-mini-photo
-      img(:class="isShowMenu ? 'move-right' : ''" src="../assets/QQ.jpg" @click.stop="showMenu")
+      img(:class="isShowMenu ? 'move-right' : ''" src="../assets/logo.jpg" @click.stop="showMenu")
     div.ad-container(ref="adContainer")
       .banner-wraper(ref="bannerWraper" :style="{width: adwraperWidth}"
       @touchstart="touchStartHandler"

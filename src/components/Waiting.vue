@@ -34,7 +34,7 @@ export default {
         document.getElementById('success-log').setAttribute('style', 'transform: scale(0.8); opacity: 1;')
         let stars = document.querySelectorAll('img')
         for (let i = 0; i < stars.length; ++i) {
-          let top = -20 + (i % 2 === 0 ? -5 : 5)
+          let top = -30 + (i % 2 === 0 ? -5 : 5)
           let left = 16 * i
           stars[i].setAttribute('style', 'top: ' + top + '%; opacity: 1; left: ' + left + '%')
         }
