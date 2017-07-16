@@ -9,15 +9,20 @@ div.photo-and-tag
     div.info 点击标签添加
     transition-group.tags(name="list-2", tag="div")
       span.tag(v-for="(tag, i) in sysTags", :id="'sys-' + i", :key="tag", :style="'background: #' + tagColor[tag] || '000'") {{ tag }}
-  button(@click="match") 开始匹配
+  button(@click="match") {{ action }}
   span.take-photo(@click="takePhoto") 不满意？重新拍一张
+  spinner.spinner(:size="50")
 </template>
 
 <script>
 import Conf from '../config'
+import Spinner from 'vue-simple-spinner'
 
 export default {
   name: 'photo-and-tag',
+  components: {
+    Spinner
+  },
   data () {
     let userTags = this.$route.query.tags
     let sysTags = []
@@ -37,7 +42,8 @@ export default {
       nickname: this.$route.query.nickname || '',
       userTags: userTags,
       sysTags: sysTags,
-      tagColor: Conf.tagColor
+      tagColor: Conf.tagColor,
+      action: '开始匹配'
     }
   },
   mounted () {
@@ -78,10 +84,13 @@ export default {
       }
     },
     takePhoto () {
-      console.log('take photo')
+      if (this.action === '照片上传中...') return
+      this.action = '照片上传中...'
+      document.querySelector('.spinner').setAttribute('style', 'text-align: right; opacity: 1;')
       window.PhotoNative.takePhoto()
     },
     match () {
+      if (this.action === '照片上传中...') return
       if (this.userTags.length === 0) {
         alert('请选择标签')
         return
@@ -100,6 +109,7 @@ export default {
   flex-direction: column
   box-sizing: border-box
   padding: .2rem .3rem
+  position: relative
   .user-and-tag
     flex-grow: 1
     .user
@@ -155,4 +165,10 @@ export default {
     transform: translateY(-.3rem)
   .list-1-leave-active, .list-2-leave-active
     position: absolute
+.spinner
+  position: absolute
+  bottom: 1rem
+  left: 0
+  width: 100%
+  opacity: 0
 </style>

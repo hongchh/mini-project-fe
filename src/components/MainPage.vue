@@ -19,14 +19,18 @@ div.wraper
         li.dot-not-curr(:class="{dotCurr: isCurrent[1]}")
         li.dot-not-curr(:class="{dotCurr: isCurrent[2]}")
     button(@click="takePhoto") {{ action }}
+  spinner.spinner(:size="50")
 </template>
 
 <script>
 import UserMenu from './UserMenu'
+import Spinner from 'vue-simple-spinner'
+
 export default {
   name: 'main-page',
   components: {
-    UserMenu
+    UserMenu,
+    Spinner
   },
   data () {
     return {
@@ -43,7 +47,9 @@ export default {
   },
   methods: {
     takePhoto () {
-      console.log('take photo')
+      if (this.action === '照片上传中...') return
+      document.querySelector('.spinner').setAttribute('style', 'text-align: right; opacity: 1;')
+      this.action = '照片上传中...'
       window.PhotoNative.takePhoto()
     },
     showMenu () {
@@ -107,6 +113,7 @@ p
   margin: 0
 .wraper
   height: 100%
+  position: relative
   .toolbar
     position: absolute
     padding: .18rem 0
@@ -188,15 +195,18 @@ p
       transition: all .8s ease-out
     .move-right
       left: 85%
-  
   button
     width: 100%
     background: rgb(255, 175, 2)
-    //margin-top: .3rem
     font-size: .15rem
     border: none
     border-radius: .3rem
     padding: .1rem
     color: white
     outline: none
+.spinner
+  position: absolute
+  top: 50%
+  width: 100%
+  opacity: 0
 </style>
