@@ -84,6 +84,8 @@ export default {
     hideMenu () {
       this.$emit('parentHideMenu', false)
       this.isShowMenu = false
+      this.isPrefer = false
+      this.isCount = false
     },
     lastMenu () {
       this.isCount = false
@@ -126,8 +128,10 @@ export default {
       axios.get('/index.php/value/getcount/' + self.$route.query.openid).then(res => {
         if (res.status === 200) {
           console.log(res.data.data)
-          this.countMoney = '￥' + res.data.data.count
-          this.totalIncome = '￥' + res.data.data.income
+          var count = Number(res.data.data.count)
+          var income = Number(res.data.data.income)
+          this.countMoney = '￥' + count.toFixed(2)
+          this.totalIncome = '￥' + income.toFixed(2)
         }
       })
     },
