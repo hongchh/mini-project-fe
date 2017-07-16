@@ -30,7 +30,7 @@ export default {
   monthMood: {
     'sad': {
       'mood': '伤心',
-      'content': '伤心伤心伤心',
+      'content': '所有失去的都会以另一种方式归来，世界如此复杂，你要内心强大',
       'url': ['https://item.jd.com/11963221.html', 'https://detail.tmall.com/item.htm?spm=a230r.1.14.62.ebb2eb2n2ZMbc&id=522784907853&ns=1&abbucket=19'],
       'imgs': [
         {
