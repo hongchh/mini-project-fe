@@ -10,11 +10,13 @@ const js = path.join(__dirname, './dist/static/js')
 const css = path.join(__dirname, './dist/static/css')
 const img = path.join(__dirname, './dist/static/img')
 const manifest = path.join(__dirname, './dist/index.manifest')
+const data = path.join(__dirname, './dist/data')
 
 let app = express()
 
 app.use(compression())
 app.use(config.rootUrl, express.static(index))
+app.use('/data', express.static(data))
 app.use('/static/js', express.static(js))
 app.use('/static/css', express.static(css))
 app.use('/static/img', express.static(img))

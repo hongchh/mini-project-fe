@@ -4,10 +4,6 @@
       img(src="../assets/star-on.png", v-for="i in rating", :id="i", @click="setRating($event)")
       img(src="../assets/star-off.png", v-for="i in (5 - rating)", :id="i + rating", @click="setRating($event)")
     button#evaluateBtn(@click="EvaluateSub") 提交评价
-    //- div.alert-box
-    //-   p.alert-title 你们互相喜欢了
-    //-   p 对方的 QQ 是：{{QQ}}
-
 </template>
 <script>
 import axios from 'axios'
@@ -55,8 +51,8 @@ export default {
     margin-top: .1rem
     padding: .1rem
     img
-      width: .4rem
-      height: .4rem
+      width: .8rem
+      height: .8rem
   #evaluateBtn
     margin: 0 auto
     background: rgb(255, 175, 2)
@@ -77,6 +73,4 @@ export default {
     background: #000
     color: #fff
     .alert-title
-
-
 </style>
