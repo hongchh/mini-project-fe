@@ -1,8 +1,8 @@
 <template lang="pug">
 div.waiting
   div.xiaohua {{ xiaohua }}
-  spinner(:size="50")
-  span 匹配中
+  spinner.spinner(:size="50")
+  span {{ word }}
   div#success-log
   img(src="../assets/star-on.png", v-for="i in 7")
 </template>
@@ -21,12 +21,15 @@ export default {
     let xiaohua = expression < 30 ? '和尚不能吃肉，好多都偏胖；道士可以吃肉，好多都是瘦子，我陷入了沉思。。。'
       : expression < 60 ? '职场就是这样，把自己累成狗的永远干不过那些把自己伪装成狗的。'
       : '“为什么大冷天人很难出被窝？”“因为冰系魔法通常带有禁锢效果。”'
-    return { xiaohua }
+    let word = '匹配中'
+    return { xiaohua, word }
   },
   methods: {
     chat (openid, nickname) {
       let style = 'transform: scale(1.2); opacity: 1;'
       document.getElementById('success-log').setAttribute('style', style)
+      document.querySelector('.spinner').setAttribute('style', 'display: none;')
+      this.word = ''
       setTimeout(() => {
         document.getElementById('success-log').setAttribute('style', 'transform: scale(0.8); opacity: 1;')
         let stars = document.querySelectorAll('img')
@@ -90,12 +93,12 @@ export default {
     margin-top: .2rem
   #success-log
     width: 60%
-    height: 60%
-    background: url(../assets/QQ.jpg)
+    height: 30%
+    background: url(../assets/congrats0.gif)
     background-size: 100% 100%
     position: absolute
     left: 20%
-    top: 20%
+    top: 35%
     transition: all 1s
     opacity: 0
     transform: scale(0.5)

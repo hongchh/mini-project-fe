@@ -30,8 +30,7 @@ export default {
       data.append('openidA', this.$route.query.openidA)
       data.append('openidB', this.$route.query.openidB)
       data.append('score', this.rating)
-      axios.post('/index.php/', data).then(res => {
-        // 判断是否互相喜欢，‘是’返回对方的扣扣号
+      axios.post('/index.php/value/adjust', data).then(res => {
         this.$router.replace('/main-page?openid=' + this.$route.query.openidA)
       }).catch(e => {
         console.log(e)

@@ -115,7 +115,7 @@ export default {
     .user
       img
         width: 1.5rem
-        height: 1.8rem
+        height: 2.4rem
         border: .01rem solid #888
         display: block
         margin: 0 auto .1rem auto
