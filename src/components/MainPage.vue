@@ -212,5 +212,5 @@ p
   position: absolute
   top: 50%
   width: 100%
-  opacity: 0
+  display: none
 </style>

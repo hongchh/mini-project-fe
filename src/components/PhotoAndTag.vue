@@ -170,5 +170,5 @@ export default {
   bottom: 1rem
   left: 0
   width: 100%
-  opacity: 0
+  display: none
 </style>
