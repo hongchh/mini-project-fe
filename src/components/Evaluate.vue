@@ -4,6 +4,9 @@
       img(src="../assets/star-on.png", v-for="i in rating", :id="i", @click="setRating($event)")
       img(src="../assets/star-off.png", v-for="i in (5 - rating)", :id="i + rating", @click="setRating($event)")
     button#evaluateBtn(@click="EvaluateSub") 提交评价
+    //- div.alert-box
+    //-   p.alert-title 你们互相喜欢了
+    //-   p 对方的 QQ 是：{{QQ}}
 
 </template>
 <script>
@@ -13,7 +16,8 @@ export default {
   name: 'evaluate',
   data () {
     return {
-      rating: 1
+      rating: 1,
+      QQ: '1197640676'
     }
   },
   methods: {
@@ -27,6 +31,7 @@ export default {
       data.append('openidB', this.$route.query.openidB)
       data.append('score', this.rating)
       axios.post('/index.php/', data).then(res => {
+        // 判断是否互相喜欢，‘是’返回对方的扣扣号
         this.$router.replace('/main-page?openid=' + this.$route.query.openidA)
       }).catch(e => {
         console.log(e)
@@ -39,6 +44,7 @@ export default {
 
 <style lang="sass">
 .container
+  position: relative
   display: flex
   justify-content: space-around
   flex-direction: column
@@ -62,4 +68,16 @@ export default {
     color: white
     outline: none
     width: 40%
+  .alert-box
+    position: absolute
+    left: 50%
+    top: 50%
+    padding: .2rem
+    font-size: .16rem
+    transform: translate(-50%, -50%)
+    background: #000
+    color: #fff
+    .alert-title
+
+
 </style>
