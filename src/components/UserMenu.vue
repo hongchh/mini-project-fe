@@ -106,6 +106,7 @@ export default {
           console.log(ret)
           if (ret < 24) {
             self.currentData = Con.monthMood['sad']
+            console.log(self.currentData)
           } else if (ret < 49) {
             self.currentData = Con.monthMood['normal']
           } else if (ret < 64) {
