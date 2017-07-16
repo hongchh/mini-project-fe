@@ -102,8 +102,8 @@ export default {
       let self = this
       axios.get(monthMoodUrl).then(res => {
         if (res.status === 200) {
-          let ret = res.data
-          console.log(ret.data)
+          let ret = res.data.data[0]
+          console.log(ret)
           if (ret < 24) {
             self.currentData = Con.monthMood['sad']
           } else if (ret < 49) {
