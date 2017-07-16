@@ -29,8 +29,8 @@ export default {
   },
   monthMood: {
     'sad': {
-      'mood': '伤心',
-      'content': '所有失去的都会以另一种方式归来，世界如此复杂，你要内心强大',
+      'mood': '郁郁寡欢的人',
+      'content': '再计较的事，多年后看来也不过是个不足挂齿的玩笑，再悲伤的事，多年后想起也不过是段可供回忆的往事，再困难的事，多年后怎么都觉得轻而易举，不快的总会过去，心脏只有那么小，总会让开心占据多一点空间，把不开心统统扫到一边，毕竟它们不过是细小的尘埃而已',
       'url': ['https://item.jd.com/11963221.html', 'https://detail.tmall.com/item.htm?spm=a230r.1.14.62.ebb2eb2n2ZMbc&id=522784907853&ns=1&abbucket=19'],
       'imgs': [
         {
