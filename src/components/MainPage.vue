@@ -42,7 +42,8 @@ export default {
       endX: 0,
       moveX: 0,
       slideCurr: 0,
-      isCurrent: [true, false, false]
+      isCurrent: [true, false, false],
+      timer: null
     }
   },
   methods: {
@@ -83,7 +84,7 @@ export default {
       this.isCurrent[this.slideCurr] = true
     },
     anim () {
-      setInterval(() => {
+      this.timer = setInterval(() => {
         if (this.slideCurr < 2) {
           this.slideCurr ++
           this.$refs.bannerWraper.style.left = -this.slideCurr * 100 + '%'
@@ -101,6 +102,9 @@ export default {
   mounted () {
     this.adwraperWidth = this.$refs.adContainer.offsetWidth * 3 + 'px'
     this.anim()
+  },
+  destroyed () {
+    clearInterval(this.timer)
   }
 }
 </script>

@@ -4,7 +4,7 @@ div.select-login
     span.title 选择登录方式
   img(src="../assets/QQ.jpg")
   div.methods
-    button(@click="login") QQ登录
+    button(@touchend="login") QQ登录
   spinner.spinner(:size="50")
 </template>
 
@@ -16,9 +16,13 @@ export default {
   components: {
     Spinner
   },
+  mounted () {
+    console.log(2333)
+  },
   methods: {
     login () {
-      document.querySelector('.spinner').setAttribute('style', 'text-align: right; opacity: 1;')
+      console.log('select-login')
+      document.querySelector('.spinner').setAttribute('style', 'text-align: right; display: block;')
       window.LoginNative.login()
     }
   }
@@ -57,9 +61,10 @@ export default {
       padding: .1rem
       color: white
       outline: none
+      z-index: 999
   .spinner
     position: absolute
     bottom: .3rem
     width: 100%
-    opacity: 0
+    display: none
 </style>
